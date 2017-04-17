@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liveneo.etrepair.dao.mapper.GaragePhotoMapper">
+	<resultMap id="BaseResultMap" type="com.liveneo.etrepair.pojo.GaragePhoto">
+		<id column="garage_photo_id" property="garagePhotoId" jdbcType="VARCHAR" />
+		<result column="garage_id" property="garageId" jdbcType="VARCHAR" />
+		<result column="photo_url" property="photoUrl" jdbcType="VARCHAR" />
+		<result column="photo_order" property="photoOrder" jdbcType="TINYINT" />
+		<result column="create_by" property="createBy" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		garage_photo_id, garage_id, photo_url, photo_order, create_by, create_time, update_by,
+		update_time
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.liveneo.etrepair.pojo.GaragePhotoExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from et_garage_photo
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="page != null">
+			limit #{page.begin} , #{page.length}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from et_garage_photo
+		where garage_photo_id = #{garagePhotoId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from et_garage_photo
+		where garage_photo_id = #{garagePhotoId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.liveneo.etrepair.pojo.GaragePhotoExample">
+		delete from et_garage_photo
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.liveneo.etrepair.pojo.GaragePhoto">
+		<selectKey keyProperty="garagePhotoId" resultType="string"
+			order="BEFORE">
+			SELECT replace(uuid(),'-','') as garagePhotoId
+		</selectKey>
+		insert into et_garage_photo (garage_photo_id, garage_id, photo_url,
+		photo_order, create_by, create_time,
+		update_by, update_time)
+		values (#{garagePhotoId,jdbcType=VARCHAR}, #{garageId,jdbcType=VARCHAR},
+		#{photoUrl,jdbcType=VARCHAR},
+		#{photoOrder,jdbcType=TINYINT}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+		#{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.liveneo.etrepair.pojo.GaragePhoto">
+		insert into et_garage_photo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="garagePhotoId != null">
+				garage_photo_id,
+			</if>
+			<if test="garageId != null">
+				garage_id,
+			</if>
+			<if test="photoUrl != null">
+				photo_url,
+			</if>
+			<if test="photoOrder != null">
+				photo_order,
+			</if>
+			<if test="createBy != null">
+				create_by,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateBy != null">
+				update_by,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="garagePhotoId != null">
+				#{garagePhotoId,jdbcType=VARCHAR},
+			</if>
+			<if test="garageId != null">
+				#{garageId,jdbcType=VARCHAR},
+			</if>
+			<if test="photoUrl != null">
+				#{photoUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="photoOrder != null">
+				#{photoOrder,jdbcType=TINYINT},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+				#{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.liveneo.etrepair.pojo.GaragePhotoExample"
+		resultType="java.lang.Integer">
+		select count(*) from et_garage_photo
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update et_garage_photo
+		<set>
+			<if test="record.garagePhotoId != null">
+				garage_photo_id = #{record.garagePhotoId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.garageId != null">
+				garage_id = #{record.garageId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.photoUrl != null">
+				photo_url = #{record.photoUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="record.photoOrder != null">
+				photo_order = #{record.photoOrder,jdbcType=TINYINT},
+			</if>
+			<if test="record.createBy != null">
+				create_by = #{record.createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateBy != null">
+				update_by = #{record.updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update et_garage_photo
+		set garage_photo_id = #{record.garagePhotoId,jdbcType=VARCHAR},
+		garage_id = #{record.garageId,jdbcType=VARCHAR},
+		photo_url = #{record.photoUrl,jdbcType=VARCHAR},
+		photo_order = #{record.photoOrder,jdbcType=TINYINT},
+		create_by = #{record.createBy,jdbcType=VARCHAR},
+		create_time = #{record.createTime,jdbcType=TIMESTAMP},
+		update_by = #{record.updateBy,jdbcType=VARCHAR},
+		update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.liveneo.etrepair.pojo.GaragePhoto">
+		update et_garage_photo
+		<set>
+			<if test="garageId != null">
+				garage_id = #{garageId,jdbcType=VARCHAR},
+			</if>
+			<if test="photoUrl != null">
+				photo_url = #{photoUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="photoOrder != null">
+				photo_order = #{photoOrder,jdbcType=TINYINT},
+			</if>
+			<if test="createBy != null">
+				create_by = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+				update_by = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where garage_photo_id = #{garagePhotoId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.liveneo.etrepair.pojo.GaragePhoto">
+		update et_garage_photo
+		set garage_id = #{garageId,jdbcType=VARCHAR},
+		photo_url = #{photoUrl,jdbcType=VARCHAR},
+		photo_order = #{photoOrder,jdbcType=TINYINT},
+		create_by = #{createBy,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_by = #{updateBy,jdbcType=VARCHAR},
+		update_time = #{updateTime,jdbcType=TIMESTAMP}
+		where garage_photo_id = #{garagePhotoId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="getGaragePhotoByGarageId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from et_garage_photo
+		where garage_id=#{garageId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getGaragePhotoByGaragePhotoId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from et_garage_photo
+		where garage_photo_id=#{garagePhotoId,jdbcType=VARCHAR}
+	</select>
+</mapper>

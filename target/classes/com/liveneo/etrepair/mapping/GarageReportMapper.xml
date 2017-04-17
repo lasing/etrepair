@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liveneo.etrepair.dao.mapper.GarageReportMapper">
+	<resultMap id="BaseResultMap" type="com.liveneo.etrepair.pojo.GarageReport">
+		<id column="garage_id" property="garageId" jdbcType="VARCHAR" />
+		<result column="garage_code" property="garageCode" jdbcType="VARCHAR" />
+		<result column="payment_rate" property="paymentRate" jdbcType="DOUBLE" />
+		<result column="earned_premium" property="earnedPremium"
+			jdbcType="DOUBLE" />
+		<result column="year_premium" property="yearPremium" jdbcType="DOUBLE" />
+		<result column="completion_amount" property="completionAmount"
+			jdbcType="DOUBLE" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		garage_id, garage_code, payment_rate, earned_premium, year_premium,
+		completion_amount
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.liveneo.etrepair.pojo.GarageReportExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from et_garage_report
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="page != null">
+			limit #{page.begin} , #{page.length}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from et_garage_report
+		where garage_id = #{garageId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from et_garage_report
+		where garage_id = #{garageId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.liveneo.etrepair.pojo.GarageReportExample">
+		delete from et_garage_report
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.liveneo.etrepair.pojo.GarageReport">
+		insert into et_garage_report (garage_id, garage_code, payment_rate,
+		earned_premium, year_premium, completion_amount
+		)
+		values (#{garageId,jdbcType=VARCHAR}, #{garageCode,jdbcType=VARCHAR},
+		#{paymentRate,jdbcType=DOUBLE},
+		#{earnedPremium,jdbcType=DOUBLE}, #{yearPremium,jdbcType=DOUBLE}, #{completionAmount,jdbcType=DOUBLE}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.liveneo.etrepair.pojo.GarageReport">
+		insert into et_garage_report
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="garageId != null">
+				garage_id,
+			</if>
+			<if test="garageCode != null">
+				garage_code,
+			</if>
+			<if test="paymentRate != null">
+				payment_rate,
+			</if>
+			<if test="earnedPremium != null">
+				earned_premium,
+			</if>
+			<if test="yearPremium != null">
+				year_premium,
+			</if>
+			<if test="completionAmount != null">
+				completion_amount,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="garageId != null">
+				#{garageId,jdbcType=VARCHAR},
+			</if>
+			<if test="garageCode != null">
+				#{garageCode,jdbcType=VARCHAR},
+			</if>
+			<if test="paymentRate != null">
+				#{paymentRate,jdbcType=DOUBLE},
+			</if>
+			<if test="earnedPremium != null">
+				#{earnedPremium,jdbcType=DOUBLE},
+			</if>
+			<if test="yearPremium != null">
+				#{yearPremium,jdbcType=DOUBLE},
+			</if>
+			<if test="completionAmount != null">
+				#{completionAmount,jdbcType=DOUBLE},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.liveneo.etrepair.pojo.GarageReportExample"
+		resultType="java.lang.Integer">
+		select count(*) from et_garage_report
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update et_garage_report
+		<set>
+			<if test="record.garageId != null">
+				garage_id = #{record.garageId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.garageCode != null">
+				garage_code = #{record.garageCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.paymentRate != null">
+				payment_rate = #{record.paymentRate,jdbcType=DOUBLE},
+			</if>
+			<if test="record.earnedPremium != null">
+				earned_premium = #{record.earnedPremium,jdbcType=DOUBLE},
+			</if>
+			<if test="record.yearPremium != null">
+				year_premium = #{record.yearPremium,jdbcType=DOUBLE},
+			</if>
+			<if test="record.completionAmount != null">
+				completion_amount = #{record.completionAmount,jdbcType=DOUBLE},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update et_garage_report
+		set garage_id = #{record.garageId,jdbcType=VARCHAR},
+		garage_code = #{record.garageCode,jdbcType=VARCHAR},
+		payment_rate = #{record.paymentRate,jdbcType=DOUBLE},
+		earned_premium = #{record.earnedPremium,jdbcType=DOUBLE},
+		year_premium = #{record.yearPremium,jdbcType=DOUBLE},
+		completion_amount = #{record.completionAmount,jdbcType=DOUBLE}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.liveneo.etrepair.pojo.GarageReport">
+		update et_garage_report
+		<set>
+			<if test="garageCode != null">
+				garage_code = #{garageCode,jdbcType=VARCHAR},
+			</if>
+			<if test="paymentRate != null">
+				payment_rate = #{paymentRate,jdbcType=DOUBLE},
+			</if>
+			<if test="earnedPremium != null">
+				earned_premium = #{earnedPremium,jdbcType=DOUBLE},
+			</if>
+			<if test="yearPremium != null">
+				year_premium = #{yearPremium,jdbcType=DOUBLE},
+			</if>
+			<if test="completionAmount != null">
+				completion_amount = #{completionAmount,jdbcType=DOUBLE},
+			</if>
+		</set>
+		where garage_id = #{garageId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.liveneo.etrepair.pojo.GarageReport">
+		update et_garage_report
+		set garage_code = #{garageCode,jdbcType=VARCHAR},
+		payment_rate = #{paymentRate,jdbcType=DOUBLE},
+		earned_premium = #{earnedPremium,jdbcType=DOUBLE},
+		year_premium = #{yearPremium,jdbcType=DOUBLE},
+		completion_amount = #{completionAmount,jdbcType=DOUBLE}
+		where garage_id = #{garageId,jdbcType=VARCHAR}
+	</update>
+</mapper>

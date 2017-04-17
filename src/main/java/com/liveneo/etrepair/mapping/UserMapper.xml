@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liveneo.etrepair.dao.mapper.UserMapper">
+	<resultMap id="BaseResultMap" type="com.liveneo.etrepair.pojo.User">
+		<id column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="company_code" property="companyCode" jdbcType="VARCHAR" />
+		<result column="org_id" property="orgId" jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="user_code" property="userCode" jdbcType="VARCHAR" />
+		<result column="real_name" property="realName" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="user_key" property="userKey" jdbcType="VARCHAR" />
+		<result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
+		<result column="office_phone" property="officePhone" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="is_enable" property="isEnable" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<!-- 用户属性 -->
+		<result column="role_name" property="roleName" jdbcType="VARCHAR" />
+		<result column="org_code" property="OrgCode" jdbcType="VARCHAR" />
+		<result column="org_name" property="OrgName" jdbcType="VARCHAR" />
+		<result column="company_name" property="companyName" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		user_id, company_code, org_id, user_name, user_code, real_name, password,
+		user_key,
+		mobile_phone, office_phone, email, is_enable, create_by, create_time, update_by,
+		update_time
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.liveneo.etrepair.pojo.UserExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from et_user
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="page != null">
+			limit #{page.begin} , #{page.length}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from et_user
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from et_user
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.liveneo.etrepair.pojo.UserExample">
+		delete from et_user
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.liveneo.etrepair.pojo.User">
+		<selectKey keyProperty="userId" resultType="string" order="BEFORE">
+			SELECT replace(uuid(),'-','') as userId
+		</selectKey>
+		insert into et_user (user_id, company_code, org_id,
+		user_name, user_code, real_name,
+		password, user_key, mobile_phone,
+		office_phone, email, is_enable,
+		create_by, create_time, update_by,
+		update_time)
+		values (#{userId,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR},
+		#{orgId,jdbcType=VARCHAR},
+		#{userName,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR}, #{userKey,jdbcType=VARCHAR},
+		#{mobilePhone,jdbcType=VARCHAR},
+		#{officePhone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{isEnable,jdbcType=VARCHAR},
+		#{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+		#{updateBy,jdbcType=VARCHAR},
+		#{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.liveneo.etrepair.pojo.User">
+		insert into et_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="companyCode != null">
+				company_code,
+			</if>
+			<if test="orgId != null">
+				org_id,
+			</if>
+			<if test="userName != null">
+				user_name,
+			</if>
+			<if test="userCode != null">
+				user_code,
+			</if>
+			<if test="realName != null">
+				real_name,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="userKey != null">
+				user_key,
+			</if>
+			<if test="mobilePhone != null">
+				mobile_phone,
+			</if>
+			<if test="officePhone != null">
+				office_phone,
+			</if>
+			<if test="email != null">
+				email,
+			</if>
+			<if test="isEnable != null">
+				is_enable,
+			</if>
+			<if test="createBy != null">
+				create_by,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateBy != null">
+				update_by,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="companyCode != null">
+				#{companyCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				#{orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userCode != null">
+				#{userCode,jdbcType=VARCHAR},
+			</if>
+			<if test="realName != null">
+				#{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="userKey != null">
+				#{userKey,jdbcType=VARCHAR},
+			</if>
+			<if test="mobilePhone != null">
+				#{mobilePhone,jdbcType=VARCHAR},
+			</if>
+			<if test="officePhone != null">
+				#{officePhone,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="isEnable != null">
+				#{isEnable,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+				#{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.liveneo.etrepair.pojo.UserExample"
+		resultType="java.lang.Integer">
+		select count(*) from et_user
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update et_user
+		<set>
+			<if test="record.userId != null">
+				user_id = #{record.userId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.companyCode != null">
+				company_code = #{record.companyCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orgId != null">
+				org_id = #{record.orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userName != null">
+				user_name = #{record.userName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userCode != null">
+				user_code = #{record.userCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.realName != null">
+				real_name = #{record.realName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.password != null">
+				password = #{record.password,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userKey != null">
+				user_key = #{record.userKey,jdbcType=VARCHAR},
+			</if>
+			<if test="record.mobilePhone != null">
+				mobile_phone = #{record.mobilePhone,jdbcType=VARCHAR},
+			</if>
+			<if test="record.officePhone != null">
+				office_phone = #{record.officePhone,jdbcType=VARCHAR},
+			</if>
+			<if test="record.email != null">
+				email = #{record.email,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isEnable != null">
+				is_enable = #{record.isEnable,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createBy != null">
+				create_by = #{record.createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateBy != null">
+				update_by = #{record.updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update et_user
+		set user_id = #{record.userId,jdbcType=VARCHAR},
+		company_code = #{record.companyCode,jdbcType=VARCHAR},
+		org_id = #{record.orgId,jdbcType=VARCHAR},
+		user_name = #{record.userName,jdbcType=VARCHAR},
+		user_code = #{record.userCode,jdbcType=VARCHAR},
+		real_name = #{record.realName,jdbcType=VARCHAR},
+		password = #{record.password,jdbcType=VARCHAR},
+		user_key = #{record.userKey,jdbcType=VARCHAR},
+		mobile_phone = #{record.mobilePhone,jdbcType=VARCHAR},
+		office_phone = #{record.officePhone,jdbcType=VARCHAR},
+		email = #{record.email,jdbcType=VARCHAR},
+		is_enable = #{record.isEnable,jdbcType=VARCHAR},
+		create_by = #{record.createBy,jdbcType=VARCHAR},
+		create_time = #{record.createTime,jdbcType=TIMESTAMP},
+		update_by = #{record.updateBy,jdbcType=VARCHAR},
+		update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.liveneo.etrepair.pojo.User">
+		update et_user
+		<set>
+			<if test="companyCode != null">
+				company_code = #{companyCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				org_id = #{orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userCode != null">
+				user_code = #{userCode,jdbcType=VARCHAR},
+			</if>
+			<if test="realName != null">
+				real_name = #{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="userKey != null">
+				user_key = #{userKey,jdbcType=VARCHAR},
+			</if>
+			<if test="mobilePhone != null">
+				mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+			</if>
+			<if test="officePhone != null">
+				office_phone = #{officePhone,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="isEnable != null">
+				is_enable = #{isEnable,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+				create_by = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+				update_by = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.liveneo.etrepair.pojo.User">
+		update et_user
+		set company_code = #{companyCode,jdbcType=VARCHAR},
+		org_id = #{orgId,jdbcType=VARCHAR},
+		user_name = #{userName,jdbcType=VARCHAR},
+		user_code = #{userCode,jdbcType=VARCHAR},
+		real_name = #{realName,jdbcType=VARCHAR},
+		password = #{password,jdbcType=VARCHAR},
+		user_key = #{userKey,jdbcType=VARCHAR},
+		mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+		office_phone = #{officePhone,jdbcType=VARCHAR},
+		email = #{email,jdbcType=VARCHAR},
+		is_enable = #{isEnable,jdbcType=VARCHAR},
+		create_by = #{createBy,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_by = #{updateBy,jdbcType=VARCHAR},
+		update_time = #{updateTime,jdbcType=TIMESTAMP}
+		where user_id = #{userId,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updatePassByUsercode" parameterType="com.liveneo.etrepair.pojo.User">
+		update et_user
+		set password = #{password},
+		update_time = now()
+		where user_code = #{userCode}
+	</update>
+
+
+
+
+	<update id="updateOrgId" parameterType="com.liveneo.etrepair.pojo.User">
+		update et_user t set t.org_id = #{orgId,jdbcType=VARCHAR} where t.user_code
+		= #{userCode,jdbcType=VARCHAR}
+	</update>
+	<select id="getOrgIdByCode" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select t.org_id as orgId from et_org_info t where t.org_code =
+		#{orgCode,jdbcType=VARCHAR}
+	</select>
+	<!-- 符合条件的用户总数 -->
+	<select id="countByCondition" parameterType="com.liveneo.etrepair.pojo.User"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM
+		et_user U
+		where 1=1
+		<if test="userCode!= null and userCode!= '' ">
+			AND U.user_code like CONCAT('%',#{userCode},'%')
+		</if>
+		<if test="userName!= null and userName!= '' ">
+			AND U.user_name like CONCAT('%',#{userName},'%')
+		</if>
+		<if test="realName!= null and realName!= '' ">
+			AND U.real_name like CONCAT('%',#{realName},'%')
+		</if>
+		<if test="orgId!= null and orgId!= '' ">
+			AND U.org_id = #{orgId}
+		</if>
+		<if test="companyCode!= null and companyCode!= '' ">
+			AND U.company_code = #{companyCode}
+		</if>
+	</select>
+
+	<!-- 根据条件检索用户列表 -->
+	<select id="selectAllUserByCondition" resultMap="BaseResultMap"
+		parameterType="com.liveneo.etrepair.pojo.User">
+		SELECT
+		U.user_id,U.user_name,U.user_code,U.real_name,U.org_id,D.org_code,D.org_name<!-- 
+			, GROUP_CONCAT(R.role_name) AS role_name -->
+		,U.mobile_phone,U.office_phone,U.email,U.is_enable,
+		U.company_code,C.company_name FROM
+		et_user U
+		LEFT JOIN et_role_user RU
+		ON U.user_id =RU.user_id
+		LEFT JOIN et_role R
+		ON R.role_id =RU.role_id
+		LEFT JOIN et_org_info D
+		ON U.org_id=D.org_id
+		LEFT
+		JOIN et_company C
+		ON U.company_code = C.company_code
+		where 1=1
+		<if test="userCode!= null and userCode!= '' ">
+			AND U.user_code like CONCAT('%',#{userCode},'%')
+		</if>
+		<if test="userName!= null and userName!= '' ">
+			AND U.user_name like CONCAT('%',#{userName},'%')
+		</if>
+		<if test="realName!= null and realName!= '' ">
+			AND U.real_name like CONCAT('%',#{realName},'%')
+		</if>
+		<if test="orgId!= null and orgId!= '' ">
+			AND U.org_id = #{orgId}
+		</if>
+		<if test="companyCode!= null and companyCode!= '' ">
+			AND U.company_code = #{companyCode}
+		</if>
+		group by U.user_id
+		order by U.create_time
+		<if test="skip!= -1 and limit!= -1 ">
+			limit #{skip,jdbcType=INTEGER} , #{limit,jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<delete id="deleteByName" parameterType="java.lang.String">
+		delete from et_user
+		where user_name = #{username}
+	</delete>
+
+	<delete id="deleteByCode" parameterType="java.lang.String">
+		delete from et_user
+		where user_code = #{usercode}
+	</delete>
+
+	<delete id="deleteBatch" parameterType="java.util.List">
+		delete FROM et_user WHERE user_code IN (SELECT garage_code FROM
+		et_garage WHERE garage_id IN
+		<foreach collection="idList" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+		)
+	</delete>
+
+	<select id="selectByUserName" resultType="java.lang.Integer"
+		parameterType="java.lang.String">
+		select count(user_name)
+		from et_user
+		where user_name = #{username}
+	</select>
+	<select id="getOrgDesc" resultType="java.lang.String"
+		parameterType="java.lang.String">
+		select t.org_desc orgDesc from et_org_info t where t.org_code =
+		#{orgCode,jdbcType=VARCHAR}
+	</select>
+
+
+	<select id="getUserByUserCode" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from et_user
+		where usercode = #{usercode}
+	</select>
+
+	<update id="updateUserNameByUserCode">
+		update et_user
+		set user_name = #{newPhone}
+		where user_code = #{usercode}
+	</update>
+
+</mapper>

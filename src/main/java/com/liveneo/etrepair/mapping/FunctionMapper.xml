@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liveneo.etrepair.dao.mapper.FunctionMapper">
+	<resultMap id="BaseResultMap" type="com.liveneo.etrepair.pojo.Function">
+		<id column="function_id" property="functionId" jdbcType="INTEGER" />
+		<result column="function_level" property="functionLevel"
+			jdbcType="TINYINT" />
+		<result column="function_code" property="functionCode"
+			jdbcType="VARCHAR" />
+		<result column="function_name" property="functionName"
+			jdbcType="VARCHAR" />
+		<result column="function_order" property="functionOrder"
+			jdbcType="INTEGER" />
+		<result column="function_url" property="functionUrl" jdbcType="VARCHAR" />
+		<result column="parent_function_id" property="parentFunctionId"
+			jdbcType="INTEGER" />
+		<result column="icon_id" property="iconId" jdbcType="VARCHAR" />
+		<result column="is_enable" property="isEnable" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		function_id, function_level, function_code, function_name, function_order,
+		function_url,
+		parent_function_id, icon_id, is_enable, create_by, create_time, update_by, update_time
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.liveneo.etrepair.pojo.FunctionExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from et_function
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="page != null">
+			limit #{page.begin} , #{page.length}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from et_function
+		where function_id = #{functionId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from et_function
+		where function_id = #{functionId,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.liveneo.etrepair.pojo.FunctionExample">
+		delete from et_function
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.liveneo.etrepair.pojo.Function">
+		insert into et_function (function_id, function_level, function_code,
+		function_name, function_order, function_url,
+		parent_function_id, icon_id, is_enable,
+		create_by, create_time, update_by,
+		update_time)
+		values (#{functionId,jdbcType=INTEGER}, #{functionLevel,jdbcType=TINYINT},
+		#{functionCode,jdbcType=VARCHAR},
+		#{functionName,jdbcType=VARCHAR}, #{functionOrder,jdbcType=INTEGER}, #{functionUrl,jdbcType=VARCHAR},
+		#{parentFunctionId,jdbcType=INTEGER}, #{iconId,jdbcType=VARCHAR},
+		#{isEnable,jdbcType=VARCHAR},
+		#{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR},
+		#{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.liveneo.etrepair.pojo.Function">
+		insert into et_function
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="functionId != null">
+				function_id,
+			</if>
+			<if test="functionLevel != null">
+				function_level,
+			</if>
+			<if test="functionCode != null">
+				function_code,
+			</if>
+			<if test="functionName != null">
+				function_name,
+			</if>
+			<if test="functionOrder != null">
+				function_order,
+			</if>
+			<if test="functionUrl != null">
+				function_url,
+			</if>
+			<if test="parentFunctionId != null">
+				parent_function_id,
+			</if>
+			<if test="iconId != null">
+				icon_id,
+			</if>
+			<if test="isEnable != null">
+				is_enable,
+			</if>
+			<if test="createBy != null">
+				create_by,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateBy != null">
+				update_by,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="functionId != null">
+				#{functionId,jdbcType=INTEGER},
+			</if>
+			<if test="functionLevel != null">
+				#{functionLevel,jdbcType=TINYINT},
+			</if>
+			<if test="functionCode != null">
+				#{functionCode,jdbcType=VARCHAR},
+			</if>
+			<if test="functionName != null">
+				#{functionName,jdbcType=VARCHAR},
+			</if>
+			<if test="functionOrder != null">
+				#{functionOrder,jdbcType=INTEGER},
+			</if>
+			<if test="functionUrl != null">
+				#{functionUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="parentFunctionId != null">
+				#{parentFunctionId,jdbcType=INTEGER},
+			</if>
+			<if test="iconId != null">
+				#{iconId,jdbcType=VARCHAR},
+			</if>
+			<if test="isEnable != null">
+				#{isEnable,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+				#{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.liveneo.etrepair.pojo.FunctionExample"
+		resultType="java.lang.Integer">
+		select count(*) from et_function
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update et_function
+		<set>
+			<if test="record.functionId != null">
+				function_id = #{record.functionId,jdbcType=INTEGER},
+			</if>
+			<if test="record.functionLevel != null">
+				function_level = #{record.functionLevel,jdbcType=TINYINT},
+			</if>
+			<if test="record.functionCode != null">
+				function_code = #{record.functionCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.functionName != null">
+				function_name = #{record.functionName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.functionOrder != null">
+				function_order = #{record.functionOrder,jdbcType=INTEGER},
+			</if>
+			<if test="record.functionUrl != null">
+				function_url = #{record.functionUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="record.parentFunctionId != null">
+				parent_function_id = #{record.parentFunctionId,jdbcType=INTEGER},
+			</if>
+			<if test="record.iconId != null">
+				icon_id = #{record.iconId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isEnable != null">
+				is_enable = #{record.isEnable,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createBy != null">
+				create_by = #{record.createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateBy != null">
+				update_by = #{record.updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update et_function
+		set function_id = #{record.functionId,jdbcType=INTEGER},
+		function_level = #{record.functionLevel,jdbcType=TINYINT},
+		function_code = #{record.functionCode,jdbcType=VARCHAR},
+		function_name = #{record.functionName,jdbcType=VARCHAR},
+		function_order = #{record.functionOrder,jdbcType=INTEGER},
+		function_url = #{record.functionUrl,jdbcType=VARCHAR},
+		parent_function_id = #{record.parentFunctionId,jdbcType=INTEGER},
+		icon_id = #{record.iconId,jdbcType=VARCHAR},
+		is_enable = #{record.isEnable,jdbcType=VARCHAR},
+		create_by = #{record.createBy,jdbcType=VARCHAR},
+		create_time = #{record.createTime,jdbcType=TIMESTAMP},
+		update_by = #{record.updateBy,jdbcType=VARCHAR},
+		update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.liveneo.etrepair.pojo.Function">
+		update et_function
+		<set>
+			<if test="functionLevel != null">
+				function_level = #{functionLevel,jdbcType=TINYINT},
+			</if>
+			<if test="functionCode != null">
+				function_code = #{functionCode,jdbcType=VARCHAR},
+			</if>
+			<if test="functionName != null">
+				function_name = #{functionName,jdbcType=VARCHAR},
+			</if>
+			<if test="functionOrder != null">
+				function_order = #{functionOrder,jdbcType=INTEGER},
+			</if>
+			<if test="functionUrl != null">
+				function_url = #{functionUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="parentFunctionId != null">
+				parent_function_id = #{parentFunctionId,jdbcType=INTEGER},
+			</if>
+			<if test="iconId != null">
+				icon_id = #{iconId,jdbcType=VARCHAR},
+			</if>
+			<if test="isEnable != null">
+				is_enable = #{isEnable,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+				create_by = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+				update_by = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where function_id = #{functionId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.liveneo.etrepair.pojo.Function">
+		update et_function
+		set function_level = #{functionLevel,jdbcType=TINYINT},
+		function_code = #{functionCode,jdbcType=VARCHAR},
+		function_name = #{functionName,jdbcType=VARCHAR},
+		function_order = #{functionOrder,jdbcType=INTEGER},
+		function_url = #{functionUrl,jdbcType=VARCHAR},
+		parent_function_id = #{parentFunctionId,jdbcType=INTEGER},
+		icon_id = #{iconId,jdbcType=VARCHAR},
+		is_enable = #{isEnable,jdbcType=VARCHAR},
+		create_by = #{createBy,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_by = #{updateBy,jdbcType=VARCHAR},
+		update_time = #{updateTime,jdbcType=TIMESTAMP}
+		where function_id = #{functionId,jdbcType=INTEGER}
+	</update>
+
+	<!-- 查询用户角色的权限菜单 -->
+	<select id="selectFunctionByRoleId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		SELECT
+		et_function.function_id,
+		et_function.function_level,
+		et_function.function_name,
+		et_function.function_order,
+		et_function.function_url,
+		et_function.parent_function_id
+		FROM et_function INNER JOIN et_role_function ON
+		et_role_function.role_function_id = et_function.function_id
+		WHERE
+		et_role_function.role_id=#{id,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 查询没有子菜单的节点 -->
+	<select id="noSubFuncTopFunc" resultType="com.liveneo.etrepair.model.NoSubFuncResultDto">
+		select function_id from et_function F
+		where F.parent_function_id is null
+		and
+		F.function_id not in( select function_id from et_function where function_id in
+		(select parent_function_id from et_function ))
+	</select>
+
+	<!-- 查询用户的菜单 -->
+	<select id="selectFunctionByUserId" resultMap="BaseResultMap"
+		parameterType="com.liveneo.etrepair.model.NoSubFuncConditionDto">
+		select DISTINCT
+		F.function_id,F.parent_function_id,F.function_order,F.function_name,F.function_url,F.icon_id,I.icon_path,I.icon_class
+		FROM et_user U
+		left join et_role_user RU
+		on U.user_id =RU.user_id
+		left join et_role_function RF
+		on RU.role_id =RF.role_id
+		left join et_function F
+		on RF.function_id =F.function_id
+		left join et_icon I
+		on F.icon_id =I.icon_id
+		WHERE U.user_id=#{userId,jdbcType=VARCHAR} and F.function_id is not null
+		<if test="noSubFuncIds!= null and  noSubFuncIds!= '' ">
+			AND F.function_id not in (${noSubFuncIds})
+		</if>
+	</select>
+
+	<select id="selectFuncAndIconClassByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select I.icon_class ,
+		F.function_id, F.function_level, F.function_name, F.function_order, F.function_url,
+		F.parent_function_id,
+		F.icon_id, F.create_by, F.create_time, F.update_by, F.update_time
+		from et_function F
+		left join et_icon I
+		on F.icon_id = I.icon_id
+		where F.function_id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<!-- 查询所有的菜单 -->
+	<select id="selectAllFunction" resultMap="BaseResultMap">
+		SELECT
+		F.function_id,
+		F.function_level,
+		F.function_name,
+		F.function_order,
+		F.function_url,
+		F.parent_function_id,
+		F.icon_id
+		<!-- ,I.icon_name as ICONNAME -->
+		FROM et_function F
+		left join et_icon I
+		on F.icon_id = I.icon_id
+
+	</select>
+
+	<select id="isFunctionReadonly" parameterType="com.liveneo.etrepair.model.IsFunctionReadOnlyDto"
+		resultType="Byte">
+		SELECT RF.isreadonly
+		FROM et_user U
+		LEFT JOIN et_role_user RU
+		ON U.user_id=RU.user_id
+		LEFT JOIN et_role_function RF
+		ON RU.role_id=RF.role_id
+		LEFT JOIN et_function F
+		ON RF.function_id=F.function_id
+		WHERE
+		U.user_id=#{userId,jdbcType=VARCHAR} and F.function_url=#{functionUrl,jdbcType=VARCHAR}
+		ORDER BY RF.isreadonly
+	</select>
+</mapper>

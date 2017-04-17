@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+encoding//src/main/resources/env/dev/etrepair_config.properties=UTF-8
+encoding//src/main/resources/env/prd/etrepair_config.properties=UTF-8
+encoding//src/main/resources/env/sit/etrepair_config.properties=UTF-8
+encoding//src/main/resources/env/uat/etrepair_config.properties=UTF-8
+encoding//src/main/resources/etrepair_config.properties=UTF-8

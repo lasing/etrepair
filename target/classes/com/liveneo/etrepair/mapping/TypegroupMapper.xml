@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liveneo.etrepair.dao.mapper.TypegroupMapper">
+	<resultMap id="BaseResultMap" type="com.liveneo.etrepair.pojo.Typegroup">
+		<id column="type_group_id" property="typeGroupId" jdbcType="VARCHAR" />
+		<result column="type_group_code" property="typeGroupCode"
+			jdbcType="VARCHAR" />
+		<result column="type_group_name" property="typeGroupName"
+			jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		type_group_id, type_group_code, type_group_name, create_by, create_time, update_by,
+		update_time
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.liveneo.etrepair.pojo.TypegroupExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from et_typegroup
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="page != null">
+			limit #{page.begin} , #{page.length}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from et_typegroup
+		where type_group_id = #{typeGroupId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from et_typegroup
+		where type_group_id = #{typeGroupId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.liveneo.etrepair.pojo.TypegroupExample">
+		delete from et_typegroup
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.liveneo.etrepair.pojo.Typegroup">
+		<selectKey keyProperty="typeGroupId" resultType="string"
+			order="BEFORE">
+			SELECT replace(uuid(),'-','') as typeGroupId
+		</selectKey>
+		insert into et_typegroup (type_group_id, type_group_code,
+		type_group_name,
+		create_by, create_time, update_by,
+		update_time)
+		values (#{typeGroupId,jdbcType=VARCHAR}, #{typeGroupCode,jdbcType=VARCHAR},
+		#{typeGroupName,jdbcType=VARCHAR},
+		#{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR},
+		#{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.liveneo.etrepair.pojo.Typegroup">
+		insert into et_typegroup
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="typeGroupId != null">
+				type_group_id,
+			</if>
+			<if test="typeGroupCode != null">
+				type_group_code,
+			</if>
+			<if test="typeGroupName != null">
+				type_group_name,
+			</if>
+			<if test="createBy != null">
+				create_by,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateBy != null">
+				update_by,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="typeGroupId != null">
+				#{typeGroupId,jdbcType=VARCHAR},
+			</if>
+			<if test="typeGroupCode != null">
+				#{typeGroupCode,jdbcType=VARCHAR},
+			</if>
+			<if test="typeGroupName != null">
+				#{typeGroupName,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+				#{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.liveneo.etrepair.pojo.TypegroupExample"
+		resultType="java.lang.Integer">
+		select count(*) from et_typegroup
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update et_typegroup
+		<set>
+			<if test="record.typeGroupId != null">
+				type_group_id = #{record.typeGroupId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.typeGroupCode != null">
+				type_group_code = #{record.typeGroupCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.typeGroupName != null">
+				type_group_name = #{record.typeGroupName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createBy != null">
+				create_by = #{record.createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateBy != null">
+				update_by = #{record.updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update et_typegroup
+		set type_group_id = #{record.typeGroupId,jdbcType=VARCHAR},
+		type_group_code = #{record.typeGroupCode,jdbcType=VARCHAR},
+		type_group_name = #{record.typeGroupName,jdbcType=VARCHAR},
+		create_by = #{record.createBy,jdbcType=VARCHAR},
+		create_time = #{record.createTime,jdbcType=TIMESTAMP},
+		update_by = #{record.updateBy,jdbcType=VARCHAR},
+		update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.liveneo.etrepair.pojo.Typegroup">
+		update et_typegroup
+		<set>
+			<if test="typeGroupCode != null">
+				type_group_code = #{typeGroupCode,jdbcType=VARCHAR},
+			</if>
+			<if test="typeGroupName != null">
+				type_group_name = #{typeGroupName,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+				create_by = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+				update_by = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where type_group_id = #{typeGroupId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.liveneo.etrepair.pojo.Typegroup">
+		update et_typegroup
+		set type_group_code = #{typeGroupCode,jdbcType=VARCHAR},
+		type_group_name = #{typeGroupName,jdbcType=VARCHAR},
+		create_by = #{createBy,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_by = #{updateBy,jdbcType=VARCHAR},
+		update_time = #{updateTime,jdbcType=TIMESTAMP}
+		where type_group_id = #{typeGroupId,jdbcType=VARCHAR}
+	</update>
+</mapper>

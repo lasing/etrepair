@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liveneo.etrepair.dao.mapper.OrgInfoMapper">
+	<resultMap id="BaseResultMap" type="com.liveneo.etrepair.pojo.OrgInfo">
+		<id column="org_id" property="orgId" jdbcType="VARCHAR" />
+		<result column="company_code" property="companyCode" jdbcType="VARCHAR" />
+		<result column="org_code" property="orgCode" jdbcType="VARCHAR" />
+		<result column="org_name" property="orgName" jdbcType="VARCHAR" />
+		<result column="org_desc" property="orgDesc" jdbcType="VARCHAR" />
+		<result column="parent_org_id" property="parentOrgId" jdbcType="VARCHAR" />
+		<result column="is_enable" property="isEnable" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		org_id, company_code, org_code, org_name, org_desc, parent_org_id, is_enable,
+		create_by,
+		create_time, update_by, update_time
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.liveneo.etrepair.pojo.OrgInfoExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from et_org_info
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="page != null">
+			limit #{page.begin} , #{page.length}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from et_org_info
+		where org_id = #{orgId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from et_org_info
+		where org_id = #{orgId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.liveneo.etrepair.pojo.OrgInfoExample">
+		delete from et_org_info
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.liveneo.etrepair.pojo.OrgInfo">
+		<selectKey keyProperty="orgId" resultType="string" order="BEFORE">
+			SELECT replace(uuid(),'-','') as orgId
+		</selectKey>
+		insert into et_org_info (org_id, company_code, org_code,
+		org_name, org_desc, parent_org_id,
+		is_enable, create_by, create_time,
+		update_by, update_time)
+		values (#{orgId,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR},
+		#{orgCode,jdbcType=VARCHAR},
+		#{orgName,jdbcType=VARCHAR}, #{orgDesc,jdbcType=VARCHAR}, #{parentOrgId,jdbcType=VARCHAR},
+		#{isEnable,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.liveneo.etrepair.pojo.OrgInfo">
+		insert into et_org_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orgId != null">
+				org_id,
+			</if>
+			<if test="companyCode != null">
+				company_code,
+			</if>
+			<if test="orgCode != null">
+				org_code,
+			</if>
+			<if test="orgName != null">
+				org_name,
+			</if>
+			<if test="orgDesc != null">
+				org_desc,
+			</if>
+			<if test="parentOrgId != null">
+				parent_org_id,
+			</if>
+			<if test="isEnable != null">
+				is_enable,
+			</if>
+			<if test="createBy != null">
+				create_by,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateBy != null">
+				update_by,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orgId != null">
+				#{orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="companyCode != null">
+				#{companyCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgCode != null">
+				#{orgCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgName != null">
+				#{orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="orgDesc != null">
+				#{orgDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="parentOrgId != null">
+				#{parentOrgId,jdbcType=VARCHAR},
+			</if>
+			<if test="isEnable != null">
+				#{isEnable,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+				#{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.liveneo.etrepair.pojo.OrgInfoExample"
+		resultType="java.lang.Integer">
+		select count(*) from et_org_info
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update et_org_info
+		<set>
+			<if test="record.orgId != null">
+				org_id = #{record.orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.companyCode != null">
+				company_code = #{record.companyCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orgCode != null">
+				org_code = #{record.orgCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orgName != null">
+				org_name = #{record.orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orgDesc != null">
+				org_desc = #{record.orgDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="record.parentOrgId != null">
+				parent_org_id = #{record.parentOrgId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isEnable != null">
+				is_enable = #{record.isEnable,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createBy != null">
+				create_by = #{record.createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateBy != null">
+				update_by = #{record.updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update et_org_info
+		set org_id = #{record.orgId,jdbcType=VARCHAR},
+		company_code = #{record.companyCode,jdbcType=VARCHAR},
+		org_code = #{record.orgCode,jdbcType=VARCHAR},
+		org_name = #{record.orgName,jdbcType=VARCHAR},
+		org_desc = #{record.orgDesc,jdbcType=VARCHAR},
+		parent_org_id = #{record.parentOrgId,jdbcType=VARCHAR},
+		is_enable = #{record.isEnable,jdbcType=VARCHAR},
+		create_by = #{record.createBy,jdbcType=VARCHAR},
+		create_time = #{record.createTime,jdbcType=TIMESTAMP},
+		update_by = #{record.updateBy,jdbcType=VARCHAR},
+		update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.liveneo.etrepair.pojo.OrgInfo">
+		update et_org_info
+		<set>
+			<if test="companyCode != null">
+				company_code = #{companyCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgCode != null">
+				org_code = #{orgCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgName != null">
+				org_name = #{orgName,jdbcType=VARCHAR},
+			</if>
+			<if test="orgDesc != null">
+				org_desc = #{orgDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="parentOrgId != null">
+				parent_org_id = #{parentOrgId,jdbcType=VARCHAR},
+			</if>
+			<if test="isEnable != null">
+				is_enable = #{isEnable,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+				create_by = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+				update_by = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where org_id = #{orgId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.liveneo.etrepair.pojo.OrgInfo">
+		update et_org_info
+		set company_code = #{companyCode,jdbcType=VARCHAR},
+		org_code = #{orgCode,jdbcType=VARCHAR},
+		org_name = #{orgName,jdbcType=VARCHAR},
+		org_desc = #{orgDesc,jdbcType=VARCHAR},
+		parent_org_id = #{parentOrgId,jdbcType=VARCHAR},
+		is_enable = #{isEnable,jdbcType=VARCHAR},
+		create_by = #{createBy,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_by = #{updateBy,jdbcType=VARCHAR},
+		update_time = #{updateTime,jdbcType=TIMESTAMP}
+		where org_id = #{orgId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectByCompanyCode" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from et_org_info
+		where 1=1
+		<if test="companyCode != null">
+			and company_code = #{companyCode}
+		</if>
+	</select>
+
+	<!-- 通过组织机构代码查询组织机构信息 -->
+	<select id="selectOrgInfoByOrgcode" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from et_org_info
+		where org_code = #{orgcode}
+	</select>
+</mapper>

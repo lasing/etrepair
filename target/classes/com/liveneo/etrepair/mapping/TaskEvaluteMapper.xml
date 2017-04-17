@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liveneo.etrepair.dao.mapper.TaskEvaluteMapper">
+	<resultMap id="BaseResultMap" type="com.liveneo.etrepair.pojo.TaskEvalute">
+		<id column="ev_id" property="evId" jdbcType="VARCHAR" />
+		<result column="task_id" property="taskId" jdbcType="VARCHAR" />
+		<result column="garage_id" property="garageId" jdbcType="VARCHAR" />
+		<result column="ev_time" property="evTime" jdbcType="TIMESTAMP" />
+		<result column="ev_score" property="evScore" jdbcType="TINYINT" />
+		<result column="score_detail_id" property="scoreDetailId"
+			jdbcType="VARCHAR" />
+		<result column="ev_cost" property="evCost" jdbcType="DOUBLE" />
+		<result column="ev_memo" property="evMemo" jdbcType="VARCHAR" />
+		<result column="hits" property="hits" jdbcType="INTEGER" />
+		<result column="point_of_praise" property="pointOfPraise"
+			jdbcType="INTEGER" />
+		<result column="create_by" property="createBy" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		ev_id, task_id, garage_id, ev_time, ev_score, score_detail_id, ev_cost,
+		ev_memo,
+		hits, point_of_praise, create_by, create_time, update_by, update_time
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.liveneo.etrepair.pojo.TaskEvaluteExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from et_task_evalute
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="page != null">
+			limit #{page.begin} , #{page.length}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from et_task_evalute
+		where ev_id = #{evId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from et_task_evalute
+		where ev_id = #{evId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.liveneo.etrepair.pojo.TaskEvaluteExample">
+		delete from et_task_evalute
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.liveneo.etrepair.pojo.TaskEvalute">
+		insert into et_task_evalute (ev_id, task_id, garage_id,
+		ev_time, ev_score, score_detail_id,
+		ev_cost, ev_memo, hits,
+		point_of_praise, create_by, create_time,
+		update_by, update_time)
+		values (#{evId,jdbcType=VARCHAR}, #{taskId,jdbcType=VARCHAR},
+		#{garageId,jdbcType=VARCHAR},
+		#{evTime,jdbcType=TIMESTAMP}, #{evScore,jdbcType=TINYINT}, #{scoreDetailId,jdbcType=VARCHAR},
+		#{evCost,jdbcType=DOUBLE}, #{evMemo,jdbcType=VARCHAR},
+		#{hits,jdbcType=INTEGER},
+		#{pointOfPraise,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+		#{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.liveneo.etrepair.pojo.TaskEvalute">
+		insert into et_task_evalute
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="evId != null">
+				ev_id,
+			</if>
+			<if test="taskId != null">
+				task_id,
+			</if>
+			<if test="garageId != null">
+				garage_id,
+			</if>
+			<if test="evTime != null">
+				ev_time,
+			</if>
+			<if test="evScore != null">
+				ev_score,
+			</if>
+			<if test="scoreDetailId != null">
+				score_detail_id,
+			</if>
+			<if test="evCost != null">
+				ev_cost,
+			</if>
+			<if test="evMemo != null">
+				ev_memo,
+			</if>
+			<if test="hits != null">
+				hits,
+			</if>
+			<if test="pointOfPraise != null">
+				point_of_praise,
+			</if>
+			<if test="createBy != null">
+				create_by,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateBy != null">
+				update_by,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="evId != null">
+				#{evId,jdbcType=VARCHAR},
+			</if>
+			<if test="taskId != null">
+				#{taskId,jdbcType=VARCHAR},
+			</if>
+			<if test="garageId != null">
+				#{garageId,jdbcType=VARCHAR},
+			</if>
+			<if test="evTime != null">
+				#{evTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="evScore != null">
+				#{evScore,jdbcType=TINYINT},
+			</if>
+			<if test="scoreDetailId != null">
+				#{scoreDetailId,jdbcType=VARCHAR},
+			</if>
+			<if test="evCost != null">
+				#{evCost,jdbcType=DOUBLE},
+			</if>
+			<if test="evMemo != null">
+				#{evMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="hits != null">
+				#{hits,jdbcType=INTEGER},
+			</if>
+			<if test="pointOfPraise != null">
+				#{pointOfPraise,jdbcType=INTEGER},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+				#{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.liveneo.etrepair.pojo.TaskEvaluteExample"
+		resultType="java.lang.Integer">
+		select count(*) from et_task_evalute
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update et_task_evalute
+		<set>
+			<if test="record.evId != null">
+				ev_id = #{record.evId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.taskId != null">
+				task_id = #{record.taskId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.garageId != null">
+				garage_id = #{record.garageId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.evTime != null">
+				ev_time = #{record.evTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.evScore != null">
+				ev_score = #{record.evScore,jdbcType=TINYINT},
+			</if>
+			<if test="record.scoreDetailId != null">
+				score_detail_id = #{record.scoreDetailId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.evCost != null">
+				ev_cost = #{record.evCost,jdbcType=DOUBLE},
+			</if>
+			<if test="record.evMemo != null">
+				ev_memo = #{record.evMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.hits != null">
+				hits = #{record.hits,jdbcType=INTEGER},
+			</if>
+			<if test="record.pointOfPraise != null">
+				point_of_praise = #{record.pointOfPraise,jdbcType=INTEGER},
+			</if>
+			<if test="record.createBy != null">
+				create_by = #{record.createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateBy != null">
+				update_by = #{record.updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update et_task_evalute
+		set ev_id = #{record.evId,jdbcType=VARCHAR},
+		task_id = #{record.taskId,jdbcType=VARCHAR},
+		garage_id = #{record.garageId,jdbcType=VARCHAR},
+		ev_time = #{record.evTime,jdbcType=TIMESTAMP},
+		ev_score = #{record.evScore,jdbcType=TINYINT},
+		score_detail_id = #{record.scoreDetailId,jdbcType=VARCHAR},
+		ev_cost = #{record.evCost,jdbcType=DOUBLE},
+		ev_memo = #{record.evMemo,jdbcType=VARCHAR},
+		hits = #{record.hits,jdbcType=INTEGER},
+		point_of_praise = #{record.pointOfPraise,jdbcType=INTEGER},
+		create_by = #{record.createBy,jdbcType=VARCHAR},
+		create_time = #{record.createTime,jdbcType=TIMESTAMP},
+		update_by = #{record.updateBy,jdbcType=VARCHAR},
+		update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.liveneo.etrepair.pojo.TaskEvalute">
+		update et_task_evalute
+		<set>
+			<if test="taskId != null">
+				task_id = #{taskId,jdbcType=VARCHAR},
+			</if>
+			<if test="garageId != null">
+				garage_id = #{garageId,jdbcType=VARCHAR},
+			</if>
+			<if test="evTime != null">
+				ev_time = #{evTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="evScore != null">
+				ev_score = #{evScore,jdbcType=TINYINT},
+			</if>
+			<if test="scoreDetailId != null">
+				score_detail_id = #{scoreDetailId,jdbcType=VARCHAR},
+			</if>
+			<if test="evCost != null">
+				ev_cost = #{evCost,jdbcType=DOUBLE},
+			</if>
+			<if test="evMemo != null">
+				ev_memo = #{evMemo,jdbcType=VARCHAR},
+			</if>
+			<if test="hits != null">
+				hits = #{hits,jdbcType=INTEGER},
+			</if>
+			<if test="pointOfPraise != null">
+				point_of_praise = #{pointOfPraise,jdbcType=INTEGER},
+			</if>
+			<if test="createBy != null">
+				create_by = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+				update_by = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ev_id = #{evId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.liveneo.etrepair.pojo.TaskEvalute">
+		update et_task_evalute
+		set task_id = #{taskId,jdbcType=VARCHAR},
+		garage_id = #{garageId,jdbcType=VARCHAR},
+		ev_time = #{evTime,jdbcType=TIMESTAMP},
+		ev_score = #{evScore,jdbcType=TINYINT},
+		score_detail_id = #{scoreDetailId,jdbcType=VARCHAR},
+		ev_cost = #{evCost,jdbcType=DOUBLE},
+		ev_memo = #{evMemo,jdbcType=VARCHAR},
+		hits = #{hits,jdbcType=INTEGER},
+		point_of_praise = #{pointOfPraise,jdbcType=INTEGER},
+		create_by = #{createBy,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_by = #{updateBy,jdbcType=VARCHAR},
+		update_time = #{updateTime,jdbcType=TIMESTAMP}
+		where ev_id = #{evId,jdbcType=VARCHAR}
+	</update>
+
+
+	<select id="getTaskEvaluteByTaskId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		SELECT
+		et.ev_id AS evId,
+		er.task_type
+		AS taskType,
+		et.ev_time AS evTime,
+		et.ev_score AS evScore,
+		et.ev_cost AS
+		evCost,
+		et.ev_memo AS evMemo
+		FROM
+		et_task_evalute et
+		LEFT JOIN
+		et_repair_task er
+		ON er.task_id = et.task_id
+		WHERE et.task_id =
+		#{taskId,jdbcType=VARCHAR}
+	</select>
+
+</mapper>

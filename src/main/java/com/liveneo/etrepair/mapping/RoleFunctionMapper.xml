@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liveneo.etrepair.dao.mapper.RoleFunctionMapper">
+	<resultMap id="BaseResultMap" type="com.liveneo.etrepair.pojo.RoleFunction">
+		<id column="role_function_id" property="roleFunctionId" jdbcType="VARCHAR" />
+		<result column="operation_desc" property="operationDesc"
+			jdbcType="VARCHAR" />
+		<result column="function_id" property="functionId" jdbcType="INTEGER" />
+		<result column="role_id" property="roleId" jdbcType="VARCHAR" />
+		<result column="isreadonly" property="isreadonly" jdbcType="TINYINT" />
+		<result column="create_by" property="createBy" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		role_function_id, operation_desc, function_id, role_id, isreadonly, create_by,
+		create_time
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.liveneo.etrepair.pojo.RoleFunctionExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from et_role_function
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="page != null">
+			limit #{page.begin} , #{page.length}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from et_role_function
+		where role_function_id = #{roleFunctionId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from et_role_function
+		where role_function_id = #{roleFunctionId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.liveneo.etrepair.pojo.RoleFunctionExample">
+		delete from et_role_function
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.liveneo.etrepair.pojo.RoleFunction">
+		<selectKey keyProperty="roleFunctionId" resultType="string"
+			order="BEFORE">
+			SELECT replace(uuid(),'-','') as roleFunctionId
+		</selectKey>
+		insert into et_role_function (role_function_id, operation_desc,
+		function_id,
+		role_id, isreadonly, create_by,
+		create_time)
+		values (#{roleFunctionId,jdbcType=VARCHAR},
+		#{operationDesc,jdbcType=VARCHAR}, #{functionId,jdbcType=INTEGER},
+		#{roleId,jdbcType=VARCHAR}, #{isreadonly,jdbcType=TINYINT},
+		#{createBy,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.liveneo.etrepair.pojo.RoleFunction">
+		insert into et_role_function
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="roleFunctionId != null">
+				role_function_id,
+			</if>
+			<if test="operationDesc != null">
+				operation_desc,
+			</if>
+			<if test="functionId != null">
+				function_id,
+			</if>
+			<if test="roleId != null">
+				role_id,
+			</if>
+			<if test="isreadonly != null">
+				isreadonly,
+			</if>
+			<if test="createBy != null">
+				create_by,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="roleFunctionId != null">
+				#{roleFunctionId,jdbcType=VARCHAR},
+			</if>
+			<if test="operationDesc != null">
+				#{operationDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="functionId != null">
+				#{functionId,jdbcType=INTEGER},
+			</if>
+			<if test="roleId != null">
+				#{roleId,jdbcType=VARCHAR},
+			</if>
+			<if test="isreadonly != null">
+				#{isreadonly,jdbcType=TINYINT},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.liveneo.etrepair.pojo.RoleFunctionExample"
+		resultType="java.lang.Integer">
+		select count(*) from et_role_function
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update et_role_function
+		<set>
+			<if test="record.roleFunctionId != null">
+				role_function_id = #{record.roleFunctionId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.operationDesc != null">
+				operation_desc = #{record.operationDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="record.functionId != null">
+				function_id = #{record.functionId,jdbcType=INTEGER},
+			</if>
+			<if test="record.roleId != null">
+				role_id = #{record.roleId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isreadonly != null">
+				isreadonly = #{record.isreadonly,jdbcType=TINYINT},
+			</if>
+			<if test="record.createBy != null">
+				create_by = #{record.createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update et_role_function
+		set role_function_id = #{record.roleFunctionId,jdbcType=VARCHAR},
+		operation_desc = #{record.operationDesc,jdbcType=VARCHAR},
+		function_id = #{record.functionId,jdbcType=INTEGER},
+		role_id = #{record.roleId,jdbcType=VARCHAR},
+		isreadonly = #{record.isreadonly,jdbcType=TINYINT},
+		create_by = #{record.createBy,jdbcType=VARCHAR},
+		create_time = #{record.createTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.liveneo.etrepair.pojo.RoleFunction">
+		update et_role_function
+		<set>
+			<if test="operationDesc != null">
+				operation_desc = #{operationDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="functionId != null">
+				function_id = #{functionId,jdbcType=INTEGER},
+			</if>
+			<if test="roleId != null">
+				role_id = #{roleId,jdbcType=VARCHAR},
+			</if>
+			<if test="isreadonly != null">
+				isreadonly = #{isreadonly,jdbcType=TINYINT},
+			</if>
+			<if test="createBy != null">
+				create_by = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where role_function_id = #{roleFunctionId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.liveneo.etrepair.pojo.RoleFunction">
+		update et_role_function
+		set operation_desc = #{operationDesc,jdbcType=VARCHAR},
+		function_id = #{functionId,jdbcType=INTEGER},
+		role_id = #{roleId,jdbcType=VARCHAR},
+		isreadonly = #{isreadonly,jdbcType=TINYINT},
+		create_by = #{createBy,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP}
+		where role_function_id = #{roleFunctionId,jdbcType=VARCHAR}
+	</update>
+</mapper>

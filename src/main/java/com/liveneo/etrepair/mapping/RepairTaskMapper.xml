@@ -1,0 +1,815 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liveneo.etrepair.dao.mapper.RepairTaskMapper">
+	<resultMap id="BaseResultMap" type="com.liveneo.etrepair.pojo.RepairTask">
+		<id column="task_id" property="taskId" jdbcType="VARCHAR" />
+		<result column="garage_id" property="garageId" jdbcType="VARCHAR" />
+		<result column="company_code" property="companyCode" jdbcType="VARCHAR" />
+		<result column="org_id" property="orgId" jdbcType="VARCHAR" />
+		<result column="task_type" property="taskType" jdbcType="VARCHAR" />
+		<result column="car_type" property="carType" jdbcType="VARCHAR" />
+		<result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+		<result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+		<result column="survey_number" property="surveyNumber"
+			jdbcType="VARCHAR" />
+		<result column="survey_name" property="surveyName" jdbcType="VARCHAR" />
+		<result column="regist_no" property="registNo" jdbcType="VARCHAR" />
+		<result column="license_no" property="licenseNo" jdbcType="VARCHAR" />
+		<result column="vehicle_model" property="vehicleModel"
+			jdbcType="VARCHAR" />
+		<result column="car_owner" property="carOwner" jdbcType="VARCHAR" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="policy_no" property="policyNo" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="longitude" property="longitude" jdbcType="VARCHAR" />
+		<result column="latitude" property="latitude" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+		<result column="expected_time" property="expectedTime"
+			jdbcType="TIMESTAMP" />
+		<result column="confirm_time" property="confirmTime" jdbcType="TIMESTAMP" />
+		<result column="inform_time" property="informTime" jdbcType="TIMESTAMP" />
+		<result column="finish_time" property="finishTime" jdbcType="TIMESTAMP" />
+		<result column="ev_time" property="evTime" jdbcType="TIMESTAMP" />
+		<result column="ev_id" property="evId" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+
+		<result column="org_desc" property="orgDesc" jdbcType="VARCHAR" />
+		<result column="org_name" property="orgName" jdbcType="VARCHAR" />
+		<result column="garage_name" property="garageName" jdbcType="VARCHAR" />
+		
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		task_id, garage_id, company_code, org_id, task_type, car_type, user_account,
+		user_phone,
+		survey_number, survey_name, regist_no, license_no, vehicle_model, car_owner, mobile,
+		policy_no, address, longitude, latitude, remark, status, start_time,
+		expected_time,
+		confirm_time, inform_time, finish_time, ev_time, ev_id, create_by, create_time,
+		update_by,
+		update_time
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.liveneo.etrepair.pojo.RepairTaskExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from et_repair_task
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="page != null">
+			limit #{page.begin} , #{page.length}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from et_repair_task
+		where task_id = #{taskId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from et_repair_task
+		where task_id = #{taskId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.liveneo.etrepair.pojo.RepairTaskExample">
+		delete from et_repair_task
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.liveneo.etrepair.pojo.RepairTask">
+		insert into et_repair_task (task_id, garage_id, company_code,
+		org_id, task_type, car_type,
+		user_account, user_phone, survey_number,
+		survey_name, regist_no, license_no,
+		vehicle_model, car_owner, mobile,
+		policy_no, address, longitude,
+		latitude, remark, status,
+		start_time, expected_time, confirm_time,
+		inform_time, finish_time, ev_time,
+		ev_id, create_by, create_time,
+		update_by, update_time)
+		values (#{taskId,jdbcType=VARCHAR}, #{garageId,jdbcType=VARCHAR},
+		#{companyCode,jdbcType=VARCHAR},
+		#{orgId,jdbcType=VARCHAR}, #{taskType,jdbcType=VARCHAR}, #{carType,jdbcType=VARCHAR},
+		#{userAccount,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR},
+		#{surveyNumber,jdbcType=VARCHAR},
+		#{surveyName,jdbcType=VARCHAR}, #{registNo,jdbcType=VARCHAR}, #{licenseNo,jdbcType=VARCHAR},
+		#{vehicleModel,jdbcType=VARCHAR}, #{carOwner,jdbcType=VARCHAR},
+		#{mobile,jdbcType=VARCHAR},
+		#{policyNo,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR},
+		#{latitude,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR},
+		#{startTime,jdbcType=TIMESTAMP}, #{expectedTime,jdbcType=TIMESTAMP},
+		#{confirmTime,jdbcType=TIMESTAMP},
+		#{informTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}, #{evTime,jdbcType=TIMESTAMP},
+		#{evId,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.liveneo.etrepair.pojo.RepairTask">
+		insert into et_repair_task
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="taskId != null">
+				task_id,
+			</if>
+			<if test="garageId != null">
+				garage_id,
+			</if>
+			<if test="companyCode != null">
+				company_code,
+			</if>
+			<if test="orgId != null">
+				org_id,
+			</if>
+			<if test="taskType != null">
+				task_type,
+			</if>
+			<if test="carType != null">
+				car_type,
+			</if>
+			<if test="userAccount != null">
+				user_account,
+			</if>
+			<if test="userPhone != null">
+				user_phone,
+			</if>
+			<if test="surveyNumber != null">
+				survey_number,
+			</if>
+			<if test="surveyName != null">
+				survey_name,
+			</if>
+			<if test="registNo != null">
+				regist_no,
+			</if>
+			<if test="licenseNo != null">
+				license_no,
+			</if>
+			<if test="vehicleModel != null">
+				vehicle_model,
+			</if>
+			<if test="carOwner != null">
+				car_owner,
+			</if>
+			<if test="mobile != null">
+				mobile,
+			</if>
+			<if test="policyNo != null">
+				policy_no,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="longitude != null">
+				longitude,
+			</if>
+			<if test="latitude != null">
+				latitude,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="startTime != null">
+				start_time,
+			</if>
+			<if test="expectedTime != null">
+				expected_time,
+			</if>
+			<if test="confirmTime != null">
+				confirm_time,
+			</if>
+			<if test="informTime != null">
+				inform_time,
+			</if>
+			<if test="finishTime != null">
+				finish_time,
+			</if>
+			<if test="evTime != null">
+				ev_time,
+			</if>
+			<if test="evId != null">
+				ev_id,
+			</if>
+			<if test="createBy != null">
+				create_by,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateBy != null">
+				update_by,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="taskId != null">
+				#{taskId,jdbcType=VARCHAR},
+			</if>
+			<if test="garageId != null">
+				#{garageId,jdbcType=VARCHAR},
+			</if>
+			<if test="companyCode != null">
+				#{companyCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				#{orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="taskType != null">
+				#{taskType,jdbcType=VARCHAR},
+			</if>
+			<if test="carType != null">
+				#{carType,jdbcType=VARCHAR},
+			</if>
+			<if test="userAccount != null">
+				#{userAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhone != null">
+				#{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="surveyNumber != null">
+				#{surveyNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="surveyName != null">
+				#{surveyName,jdbcType=VARCHAR},
+			</if>
+			<if test="registNo != null">
+				#{registNo,jdbcType=VARCHAR},
+			</if>
+			<if test="licenseNo != null">
+				#{licenseNo,jdbcType=VARCHAR},
+			</if>
+			<if test="vehicleModel != null">
+				#{vehicleModel,jdbcType=VARCHAR},
+			</if>
+			<if test="carOwner != null">
+				#{carOwner,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="policyNo != null">
+				#{policyNo,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="longitude != null">
+				#{longitude,jdbcType=VARCHAR},
+			</if>
+			<if test="latitude != null">
+				#{latitude,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="startTime != null">
+				#{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="expectedTime != null">
+				#{expectedTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="confirmTime != null">
+				#{confirmTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="informTime != null">
+				#{informTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="finishTime != null">
+				#{finishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="evTime != null">
+				#{evTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="evId != null">
+				#{evId,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+				#{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.liveneo.etrepair.pojo.RepairTaskExample"
+		resultType="java.lang.Integer">
+		select count(*) from et_repair_task
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update et_repair_task
+		<set>
+			<if test="record.taskId != null">
+				task_id = #{record.taskId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.garageId != null">
+				garage_id = #{record.garageId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.companyCode != null">
+				company_code = #{record.companyCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orgId != null">
+				org_id = #{record.orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.taskType != null">
+				task_type = #{record.taskType,jdbcType=VARCHAR},
+			</if>
+			<if test="record.carType != null">
+				car_type = #{record.carType,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userAccount != null">
+				user_account = #{record.userAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userPhone != null">
+				user_phone = #{record.userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="record.surveyNumber != null">
+				survey_number = #{record.surveyNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="record.surveyName != null">
+				survey_name = #{record.surveyName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.registNo != null">
+				regist_no = #{record.registNo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.licenseNo != null">
+				license_no = #{record.licenseNo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.vehicleModel != null">
+				vehicle_model = #{record.vehicleModel,jdbcType=VARCHAR},
+			</if>
+			<if test="record.carOwner != null">
+				car_owner = #{record.carOwner,jdbcType=VARCHAR},
+			</if>
+			<if test="record.mobile != null">
+				mobile = #{record.mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="record.policyNo != null">
+				policy_no = #{record.policyNo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.address != null">
+				address = #{record.address,jdbcType=VARCHAR},
+			</if>
+			<if test="record.longitude != null">
+				longitude = #{record.longitude,jdbcType=VARCHAR},
+			</if>
+			<if test="record.latitude != null">
+				latitude = #{record.latitude,jdbcType=VARCHAR},
+			</if>
+			<if test="record.remark != null">
+				remark = #{record.remark,jdbcType=VARCHAR},
+			</if>
+			<if test="record.status != null">
+				status = #{record.status,jdbcType=VARCHAR},
+			</if>
+			<if test="record.startTime != null">
+				start_time = #{record.startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.expectedTime != null">
+				expected_time = #{record.expectedTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.confirmTime != null">
+				confirm_time = #{record.confirmTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.informTime != null">
+				inform_time = #{record.informTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.finishTime != null">
+				finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.evTime != null">
+				ev_time = #{record.evTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.evId != null">
+				ev_id = #{record.evId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createBy != null">
+				create_by = #{record.createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateBy != null">
+				update_by = #{record.updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update et_repair_task
+		set task_id = #{record.taskId,jdbcType=VARCHAR},
+		garage_id = #{record.garageId,jdbcType=VARCHAR},
+		company_code = #{record.companyCode,jdbcType=VARCHAR},
+		org_id = #{record.orgId,jdbcType=VARCHAR},
+		task_type = #{record.taskType,jdbcType=VARCHAR},
+		car_type = #{record.carType,jdbcType=VARCHAR},
+		user_account = #{record.userAccount,jdbcType=VARCHAR},
+		user_phone = #{record.userPhone,jdbcType=VARCHAR},
+		survey_number = #{record.surveyNumber,jdbcType=VARCHAR},
+		survey_name = #{record.surveyName,jdbcType=VARCHAR},
+		regist_no = #{record.registNo,jdbcType=VARCHAR},
+		license_no = #{record.licenseNo,jdbcType=VARCHAR},
+		vehicle_model = #{record.vehicleModel,jdbcType=VARCHAR},
+		car_owner = #{record.carOwner,jdbcType=VARCHAR},
+		mobile = #{record.mobile,jdbcType=VARCHAR},
+		policy_no = #{record.policyNo,jdbcType=VARCHAR},
+		address = #{record.address,jdbcType=VARCHAR},
+		longitude = #{record.longitude,jdbcType=VARCHAR},
+		latitude = #{record.latitude,jdbcType=VARCHAR},
+		remark = #{record.remark,jdbcType=VARCHAR},
+		status = #{record.status,jdbcType=VARCHAR},
+		start_time = #{record.startTime,jdbcType=TIMESTAMP},
+		expected_time = #{record.expectedTime,jdbcType=TIMESTAMP},
+		confirm_time = #{record.confirmTime,jdbcType=TIMESTAMP},
+		inform_time = #{record.informTime,jdbcType=TIMESTAMP},
+		finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
+		ev_time = #{record.evTime,jdbcType=TIMESTAMP},
+		ev_id = #{record.evId,jdbcType=VARCHAR},
+		create_by = #{record.createBy,jdbcType=VARCHAR},
+		create_time = #{record.createTime,jdbcType=TIMESTAMP},
+		update_by = #{record.updateBy,jdbcType=VARCHAR},
+		update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.liveneo.etrepair.pojo.RepairTask">
+		update et_repair_task
+		<set>
+			<if test="garageId != null">
+				garage_id = #{garageId,jdbcType=VARCHAR},
+			</if>
+			<if test="companyCode != null">
+				company_code = #{companyCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				org_id = #{orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="taskType != null">
+				task_type = #{taskType,jdbcType=VARCHAR},
+			</if>
+			<if test="carType != null">
+				car_type = #{carType,jdbcType=VARCHAR},
+			</if>
+			<if test="userAccount != null">
+				user_account = #{userAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhone != null">
+				user_phone = #{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="surveyNumber != null">
+				survey_number = #{surveyNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="surveyName != null">
+				survey_name = #{surveyName,jdbcType=VARCHAR},
+			</if>
+			<if test="registNo != null">
+				regist_no = #{registNo,jdbcType=VARCHAR},
+			</if>
+			<if test="licenseNo != null">
+				license_no = #{licenseNo,jdbcType=VARCHAR},
+			</if>
+			<if test="vehicleModel != null">
+				vehicle_model = #{vehicleModel,jdbcType=VARCHAR},
+			</if>
+			<if test="carOwner != null">
+				car_owner = #{carOwner,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="policyNo != null">
+				policy_no = #{policyNo,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="longitude != null">
+				longitude = #{longitude,jdbcType=VARCHAR},
+			</if>
+			<if test="latitude != null">
+				latitude = #{latitude,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="startTime != null">
+				start_time = #{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="expectedTime != null">
+				expected_time = #{expectedTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="confirmTime != null">
+				confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="informTime != null">
+				inform_time = #{informTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="finishTime != null">
+				finish_time = #{finishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="evTime != null">
+				ev_time = #{evTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="evId != null">
+				ev_id = #{evId,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+				create_by = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+				update_by = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where task_id = #{taskId,jdbcType=VARCHAR}
+		<if test="preStatus != null">
+			AND status = #{preStatus,jdbcType=VARCHAR}
+		</if>
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.liveneo.etrepair.pojo.RepairTask">
+		update et_repair_task
+		set garage_id = #{garageId,jdbcType=VARCHAR},
+		company_code = #{companyCode,jdbcType=VARCHAR},
+		org_id = #{orgId,jdbcType=VARCHAR},
+		task_type = #{taskType,jdbcType=VARCHAR},
+		car_type = #{carType,jdbcType=VARCHAR},
+		user_account = #{userAccount,jdbcType=VARCHAR},
+		user_phone = #{userPhone,jdbcType=VARCHAR},
+		survey_number = #{surveyNumber,jdbcType=VARCHAR},
+		survey_name = #{surveyName,jdbcType=VARCHAR},
+		regist_no = #{registNo,jdbcType=VARCHAR},
+		license_no = #{licenseNo,jdbcType=VARCHAR},
+		vehicle_model = #{vehicleModel,jdbcType=VARCHAR},
+		car_owner = #{carOwner,jdbcType=VARCHAR},
+		mobile = #{mobile,jdbcType=VARCHAR},
+		policy_no = #{policyNo,jdbcType=VARCHAR},
+		address = #{address,jdbcType=VARCHAR},
+		longitude = #{longitude,jdbcType=VARCHAR},
+		latitude = #{latitude,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR},
+		status = #{status,jdbcType=VARCHAR},
+		start_time = #{startTime,jdbcType=TIMESTAMP},
+		expected_time = #{expectedTime,jdbcType=TIMESTAMP},
+		confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+		inform_time = #{informTime,jdbcType=TIMESTAMP},
+		finish_time = #{finishTime,jdbcType=TIMESTAMP},
+		ev_time = #{evTime,jdbcType=TIMESTAMP},
+		ev_id = #{evId,jdbcType=VARCHAR},
+		create_by = #{createBy,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_by = #{updateBy,jdbcType=VARCHAR},
+		update_time = #{updateTime,jdbcType=TIMESTAMP}
+		where task_id = #{taskId,jdbcType=VARCHAR}
+	</update>
+
+
+	<select id="countRepairTask" parameterType="com.liveneo.etrepair.pojo.RepairTask"
+		resultType="java.lang.Integer">
+		select count(*) FROM et_repair_task r LEFT JOIN et_garage g ON
+		r.garage_id = g.garage_id
+		LEFT JOIN et_org_info o ON g.org_id=o.org_code where 1=1
+		<if test="taskId != null and taskId!=''">
+			and r.task_id like CONCAT('%',#{taskId},'%')
+		</if>
+		<if test="garageId != null and garageId!=''">
+			and r.garage_id like CONCAT('%',#{garageId},'%')
+		</if>
+		<if test="registNo != null and registNo!=''">
+			and r.regist_no like CONCAT('%',#{registNo},'%')
+		</if>
+		<if test="orgId != null and orgId!=''">
+			and o.org_id = #{orgId,jdbcType=VARCHAR}
+		</if>
+		<if test="status != null and status!=''">
+			and r.status = #{status,jdbcType=VARCHAR}
+		</if>
+		<if test="carOwner != null and carOwner!=''">
+			and r.car_owner like CONCAT('%',#{carOwner},'%')
+		</if>
+		<if test="licenseNo != null and licenseNo!=''">
+			and r.license_no like CONCAT('%',#{licenseNo},'%')
+		</if>
+		<if test="surveyName != null and surveyName!=''">
+			and r.survey_name like CONCAT('%',#{surveyName},'%')
+		</if>
+		<if test="startTime != null and startTime!=''">
+			and r.start_time &gt;= #{startTime}
+		</if>
+		<if test="endTime != null and endTime!=''">
+			and r.start_time &lt;= #{endTime}
+		</if>
+
+	</select>
+
+	<select id="selectRepairTaskList" resultMap="BaseResultMap"
+		parameterType="com.liveneo.etrepair.pojo.RepairTask">
+		select r.*,o.org_desc
+		FROM et_repair_task r LEFT JOIN et_garage g ON r.garage_id = g.garage_id
+		LEFT JOIN et_org_info o ON g.org_id=o.org_code
+		WHERE 1=1
+		<if test="taskId != null and taskId!=''">
+			and r.task_id like CONCAT('%',#{taskId},'%')
+		</if>
+		<if test="garageId != null and garageId!=''">
+			and r.garage_id like CONCAT('%',#{garageId},'%')
+		</if>
+		<if test="registNo != null and registNo!=''">
+			and r.regist_no like CONCAT('%',#{registNo},'%')
+		</if>
+		<if test="orgId != null and orgId!=''">
+			and o.org_id = #{orgId,jdbcType=VARCHAR}
+		</if>
+		<if test="status != null and status!=''">
+			and r.status = #{status,jdbcType=VARCHAR}
+		</if>
+		<if test="carOwner != null and carOwner!=''">
+			and r.car_owner like CONCAT('%',#{carOwner},'%')
+		</if>
+		<if test="licenseNo != null and licenseNo!=''">
+			and r.license_no like CONCAT('%',#{licenseNo},'%')
+		</if>
+		<if test="surveyName != null and surveyName!=''">
+			and r.survey_name like CONCAT('%',#{surveyName},'%')
+		</if>
+		<if test="startTime != null and startTime!=''">
+			and r.start_time &gt;= #{startTime}
+		</if>
+		<if test="endTime != null and endTime!=''">
+			and r.start_time &lt;= #{endTime}
+		</if>
+		<if test="skip != null and limit !=null">
+			limit #{skip}, #{limit}
+		</if>
+	</select>
+
+
+	<update id="updateRepairTaskStatus">
+		update et_repair_task
+		set status = #{targetStatus},
+		update_time = now()
+		where task_id = #{taskId}
+	</update>
+
+	<select id="getGarageIdByUserCode" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		SELECT g.garage_id FROM et_garage g, et_user u
+		WHERE u.user_code = g.garage_code AND u.user_code = #{userCode}
+	</select>
+	
+<!-- 	王学杰2016-11-01 -->
+	<select id="getReportFormList" resultMap="BaseResultMap"
+	parameterType="com.liveneo.etrepair.pojo.RepairTask">
+
+		select
+	re.license_no, re.car_type,re.regist_no,
+	re.task_type,re.user_account,
+	re.user_phone,re.survey_name,re.car_owner,
+	re.start_time,re.confirm_time,
+	re.status, re.finish_time,re.ev_time,ga.org_id,info.org_name,gac.garage_name
+	from et_repair_task re
+	LEFT JOIN et_garage ga on ga.garage_id=re.garage_id
+	LEFT JOIN et_garage_core gac on gac.garage_code=ga.garage_code
+	LEFT JOIN et_org_info info on ga.org_id=info.org_code
+	WHERE 1=1
+		<if test="taskId != null and taskId!=''">
+			and re.task_id like CONCAT('%',#{taskId},'%')
+		</if>
+		<if test="garageId != null and garageId!=''">
+			and re.garage_id like CONCAT('%',#{garageId},'%')
+		</if>
+		<if test="registNo != null and registNo!=''">
+			and re.regist_no like CONCAT('%',#{registNo},'%')
+		</if>
+		<if test="orgId != null and orgId!=''">
+			and info.org_id = #{orgId,jdbcType=VARCHAR}
+		</if>
+		<if test="status != null and status!=''">
+			and re.status = #{status,jdbcType=VARCHAR}
+		</if>
+		<if test="carOwner != null and carOwner!=''">
+			and re.car_owner like CONCAT('%',#{carOwner},'%')
+		</if>
+		<if test="licenseNo != null and licenseNo!=''">
+			and re.license_no like CONCAT('%',#{licenseNo},'%')
+		</if>
+		<if test="surveyName != null and surveyName!=''">
+			and re.survey_name like CONCAT('%',#{surveyName},'%')
+		</if>
+		<if test="startTime != null and startTime!=''">
+			and re.start_time &gt;= #{startTime}
+		</if>
+		<if test="endTime != null and endTime!=''">
+			and re.start_time &lt;= #{endTime}
+		</if>
+		<if test="skip != null and limit !=null">
+			limit #{skip}, #{limit}
+		</if>
+	</select>
+	
+
+</mapper>

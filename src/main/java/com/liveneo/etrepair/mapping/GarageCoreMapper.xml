@@ -1,0 +1,1334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liveneo.etrepair.dao.mapper.GarageCoreMapper">
+	<resultMap id="BaseResultMap" type="com.liveneo.etrepair.pojo.GarageCore">
+		<id column="garage_id" property="garageId" jdbcType="VARCHAR" />
+		<result column="garage_code" property="garageCode" jdbcType="VARCHAR" />
+		<result column="garage_name" property="garageName" jdbcType="VARCHAR" />
+		<result column="garage_abbr" property="garageAbbr" jdbcType="VARCHAR" />
+		<result column="garage_addr" property="garageAddr" jdbcType="VARCHAR" />
+		<result column="longitude" property="longitude" jdbcType="DECIMAL" />
+		<result column="latitude" property="latitude" jdbcType="DECIMAL" />
+		<result column="company_code" property="companyCode" jdbcType="VARCHAR" />
+		<result column="org_id" property="orgId" jdbcType="VARCHAR" />
+		<result column="industry_org_code" property="industryOrgCode"
+			jdbcType="VARCHAR" />
+		<result column="contact" property="contact" jdbcType="VARCHAR" />
+		<result column="contact_phone" property="contactPhone"
+			jdbcType="VARCHAR" />
+		<result column="fax" property="fax" jdbcType="VARCHAR" />
+		<result column="repair_level" property="repairLevel" jdbcType="VARCHAR" />
+		<result column="category_code" property="categoryCode"
+			jdbcType="VARCHAR" />
+		<result column="category_name" property="categoryName"
+			jdbcType="VARCHAR" />
+		<result column="direct_pay_flag" property="directPayFlag"
+			jdbcType="VARCHAR" />
+		<result column="part_discount_rate" property="partDiscountRate"
+			jdbcType="REAL" />
+		<result column="paint_facman_hour" property="paintFacmanHour"
+			jdbcType="REAL" />
+		<result column="repair_facman_hour" property="repairFacmanHour"
+			jdbcType="REAL" />
+		<result column="assembly_facman_hour" property="assemblyFacmanHour"
+			jdbcType="REAL" />
+		<result column="discount_standard" property="discountStandard"
+			jdbcType="REAL" />
+		<result column="repair_facman_discount" property="repairFacmanDiscount"
+			jdbcType="REAL" />
+		<result column="paint_facman_discount" property="paintFacmanDiscount"
+			jdbcType="REAL" />
+		<result column="assembly_facman_discount" property="assemblyFacmanDiscount"
+			jdbcType="REAL" />
+		<result column="machine_repair_discount" property="machineRepairDiscount"
+			jdbcType="REAL" />
+		<result column="electrican_discount" property="electricanDiscount"
+			jdbcType="REAL" />
+		<result column="eval_float_ratio" property="evalFloatRatio"
+			jdbcType="REAL" />
+		<result column="audit_ratio" property="auditRatio" jdbcType="REAL" />
+		<result column="compensate_index" property="compensateIndex"
+			jdbcType="REAL" />
+		<result column="contract_date" property="contractDate"
+			jdbcType="TIMESTAMP" />
+		<result column="repair_4s_flag" property="repair4sFlag"
+			jdbcType="VARCHAR" />
+		<result column="outside_flag" property="outsideFlag" jdbcType="VARCHAR" />
+		<result column="cpt_flag" property="cptFlag" jdbcType="VARCHAR" />
+		<result column="price_4s_code" property="price4sCode" jdbcType="VARCHAR" />
+		<result column="price_agreement_code" property="priceAgreementCode"
+			jdbcType="VARCHAR" />
+		<result column="price_mark_code" property="priceMarkCode"
+			jdbcType="VARCHAR" />
+		<result column="price_tryout_code" property="priceTryoutCode"
+			jdbcType="VARCHAR" />
+		<result column="platform_org_code" property="platformOrgCode"
+			jdbcType="VARCHAR" />
+		<result column="video_flag" property="videoFlag" jdbcType="VARCHAR" />
+		<result column="repair_tel" property="repairTel" jdbcType="VARCHAR" />
+		<result column="repair_scope" property="repairScope" jdbcType="VARCHAR" />
+		<result column="specialized_brand" property="specializedBrand"
+			jdbcType="VARCHAR" />
+		<result column="audit_opinion" property="auditOpinion"
+			jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="accountCode" property="accountcode" jdbcType="VARCHAR" />
+		<result column="accountName" property="accountname" jdbcType="VARCHAR" />
+		<result column="bankName" property="bankname" jdbcType="VARCHAR" />
+		<result column="cityCode" property="citycode" jdbcType="VARCHAR" />
+		<result column="townCode" property="towncode" jdbcType="VARCHAR" />
+		<result column="regionCode" property="regioncode" jdbcType="VARCHAR" />
+		<result column="cityName" property="cityname" jdbcType="VARCHAR" />
+		<result column="townName" property="townname" jdbcType="VARCHAR" />
+		<result column="regionName" property="regionname" jdbcType="VARCHAR" />
+		<result column="brandCode" property="brandcode" jdbcType="VARCHAR" />
+		<result column="brandName" property="brandname" jdbcType="VARCHAR" />
+		<result column="brandPercent" property="brandpercent" jdbcType="REAL" />
+		<result column="atticePointCode" property="atticepointcode"
+			jdbcType="VARCHAR" />
+		<result column="atticePointName" property="atticepointname"
+			jdbcType="VARCHAR" />
+		<result column="partsPercent" property="partspercent" jdbcType="REAL" />
+		<result column="verifyFlag" property="verifyflag" jdbcType="VARCHAR" />
+		<result column="verifyBy" property="verifyby" jdbcType="VARCHAR" />
+		<result column="verifyDate" property="verifydate" jdbcType="TIMESTAMP" />
+		<result column="is_enable" property="isEnable" jdbcType="VARCHAR" />
+		<result column="create_by" property="createBy" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+
+		<result column="org_desc" property="orgDesc" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		garage_id, garage_code, garage_name, garage_abbr, garage_addr, longitude,
+		latitude,
+		company_code, org_id, industry_org_code, contact, contact_phone, fax, repair_level,
+		category_code, category_name, direct_pay_flag, part_discount_rate,
+		paint_facman_hour,
+		repair_facman_hour, assembly_facman_hour, discount_standard, repair_facman_discount,
+		paint_facman_discount, assembly_facman_discount,
+		machine_repair_discount, electrican_discount,
+		eval_float_ratio, audit_ratio, compensate_index, contract_date, repair_4s_flag,
+		outside_flag,
+		cpt_flag, price_4s_code, price_agreement_code, price_mark_code,
+		price_tryout_code,
+		platform_org_code, video_flag, repair_tel, repair_scope, specialized_brand,
+		audit_opinion,
+		remark, accountCode, accountName, bankName, cityCode, townCode, regionCode,
+		cityName,
+		townName, regionName, brandCode, brandName, brandPercent, atticePointCode,
+		atticePointName,
+		partsPercent, verifyFlag, verifyBy, verifyDate, is_enable, create_by, create_time,
+		update_by, update_time
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.liveneo.etrepair.pojo.GarageCoreExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from et_garage_core
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="page != null">
+			limit #{page.begin} , #{page.length}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from et_garage_core
+		where garage_id = #{garageId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from et_garage_core
+		where garage_id = #{garageId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.liveneo.etrepair.pojo.GarageCoreExample">
+		delete from et_garage_core
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.liveneo.etrepair.pojo.GarageCore">
+		insert into et_garage_core (garage_id, garage_code, garage_name,
+		garage_abbr, garage_addr, longitude,
+		latitude, company_code, org_id,
+		industry_org_code, contact, contact_phone,
+		fax, repair_level, category_code,
+		category_name, direct_pay_flag, part_discount_rate,
+		paint_facman_hour, repair_facman_hour, assembly_facman_hour,
+		discount_standard, repair_facman_discount, paint_facman_discount,
+		assembly_facman_discount, machine_repair_discount,
+		electrican_discount, eval_float_ratio, audit_ratio,
+		compensate_index, contract_date, repair_4s_flag,
+		outside_flag, cpt_flag, price_4s_code,
+		price_agreement_code, price_mark_code, price_tryout_code,
+		platform_org_code, video_flag, repair_tel,
+		repair_scope, specialized_brand, audit_opinion,
+		remark, accountCode, accountName,
+		bankName, cityCode, townCode,
+		regionCode, cityName, townName,
+		regionName, brandCode, brandName,
+		brandPercent, atticePointCode, atticePointName,
+		partsPercent, verifyFlag, verifyBy,
+		verifyDate, is_enable, create_by,
+		create_time, update_by, update_time
+		)
+		values (#{garageId,jdbcType=VARCHAR}, #{garageCode,jdbcType=VARCHAR},
+		#{garageName,jdbcType=VARCHAR},
+		#{garageAbbr,jdbcType=VARCHAR}, #{garageAddr,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL},
+		#{latitude,jdbcType=DECIMAL}, #{companyCode,jdbcType=VARCHAR},
+		#{orgId,jdbcType=VARCHAR},
+		#{industryOrgCode,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR},
+		#{fax,jdbcType=VARCHAR}, #{repairLevel,jdbcType=VARCHAR},
+		#{categoryCode,jdbcType=VARCHAR},
+		#{categoryName,jdbcType=VARCHAR}, #{directPayFlag,jdbcType=VARCHAR}, #{partDiscountRate,jdbcType=REAL},
+		#{paintFacmanHour,jdbcType=REAL}, #{repairFacmanHour,jdbcType=REAL},
+		#{assemblyFacmanHour,jdbcType=REAL},
+		#{discountStandard,jdbcType=REAL},
+		#{repairFacmanDiscount,jdbcType=REAL},
+		#{paintFacmanDiscount,jdbcType=REAL},
+		#{assemblyFacmanDiscount,jdbcType=REAL},
+		#{machineRepairDiscount,jdbcType=REAL},
+		#{electricanDiscount,jdbcType=REAL}, #{evalFloatRatio,jdbcType=REAL},
+		#{auditRatio,jdbcType=REAL},
+		#{compensateIndex,jdbcType=REAL}, #{contractDate,jdbcType=TIMESTAMP}, #{repair4sFlag,jdbcType=VARCHAR},
+		#{outsideFlag,jdbcType=VARCHAR}, #{cptFlag,jdbcType=VARCHAR},
+		#{price4sCode,jdbcType=VARCHAR},
+		#{priceAgreementCode,jdbcType=VARCHAR},
+		#{priceMarkCode,jdbcType=VARCHAR},
+		#{priceTryoutCode,jdbcType=VARCHAR},
+		#{platformOrgCode,jdbcType=VARCHAR}, #{videoFlag,jdbcType=VARCHAR},
+		#{repairTel,jdbcType=VARCHAR},
+		#{repairScope,jdbcType=VARCHAR}, #{specializedBrand,jdbcType=VARCHAR},
+		#{auditOpinion,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR}, #{accountcode,jdbcType=VARCHAR}, #{accountname,jdbcType=VARCHAR},
+		#{bankname,jdbcType=VARCHAR}, #{citycode,jdbcType=VARCHAR},
+		#{towncode,jdbcType=VARCHAR},
+		#{regioncode,jdbcType=VARCHAR}, #{cityname,jdbcType=VARCHAR}, #{townname,jdbcType=VARCHAR},
+		#{regionname,jdbcType=VARCHAR}, #{brandcode,jdbcType=VARCHAR},
+		#{brandname,jdbcType=VARCHAR},
+		#{brandpercent,jdbcType=REAL}, #{atticepointcode,jdbcType=VARCHAR},
+		#{atticepointname,jdbcType=VARCHAR},
+		#{partspercent,jdbcType=REAL}, #{verifyflag,jdbcType=VARCHAR}, #{verifyby,jdbcType=VARCHAR},
+		#{verifydate,jdbcType=TIMESTAMP}, #{isEnable,jdbcType=VARCHAR},
+		#{createBy,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.liveneo.etrepair.pojo.GarageCore">
+		insert into et_garage_core
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="garageId != null">
+				garage_id,
+			</if>
+			<if test="garageCode != null">
+				garage_code,
+			</if>
+			<if test="garageName != null">
+				garage_name,
+			</if>
+			<if test="garageAbbr != null">
+				garage_abbr,
+			</if>
+			<if test="garageAddr != null">
+				garage_addr,
+			</if>
+			<if test="longitude != null">
+				longitude,
+			</if>
+			<if test="latitude != null">
+				latitude,
+			</if>
+			<if test="companyCode != null">
+				company_code,
+			</if>
+			<if test="orgId != null">
+				org_id,
+			</if>
+			<if test="industryOrgCode != null">
+				industry_org_code,
+			</if>
+			<if test="contact != null">
+				contact,
+			</if>
+			<if test="contactPhone != null">
+				contact_phone,
+			</if>
+			<if test="fax != null">
+				fax,
+			</if>
+			<if test="repairLevel != null">
+				repair_level,
+			</if>
+			<if test="categoryCode != null">
+				category_code,
+			</if>
+			<if test="categoryName != null">
+				category_name,
+			</if>
+			<if test="directPayFlag != null">
+				direct_pay_flag,
+			</if>
+			<if test="partDiscountRate != null">
+				part_discount_rate,
+			</if>
+			<if test="paintFacmanHour != null">
+				paint_facman_hour,
+			</if>
+			<if test="repairFacmanHour != null">
+				repair_facman_hour,
+			</if>
+			<if test="assemblyFacmanHour != null">
+				assembly_facman_hour,
+			</if>
+			<if test="discountStandard != null">
+				discount_standard,
+			</if>
+			<if test="repairFacmanDiscount != null">
+				repair_facman_discount,
+			</if>
+			<if test="paintFacmanDiscount != null">
+				paint_facman_discount,
+			</if>
+			<if test="assemblyFacmanDiscount != null">
+				assembly_facman_discount,
+			</if>
+			<if test="machineRepairDiscount != null">
+				machine_repair_discount,
+			</if>
+			<if test="electricanDiscount != null">
+				electrican_discount,
+			</if>
+			<if test="evalFloatRatio != null">
+				eval_float_ratio,
+			</if>
+			<if test="auditRatio != null">
+				audit_ratio,
+			</if>
+			<if test="compensateIndex != null">
+				compensate_index,
+			</if>
+			<if test="contractDate != null">
+				contract_date,
+			</if>
+			<if test="repair4sFlag != null">
+				repair_4s_flag,
+			</if>
+			<if test="outsideFlag != null">
+				outside_flag,
+			</if>
+			<if test="cptFlag != null">
+				cpt_flag,
+			</if>
+			<if test="price4sCode != null">
+				price_4s_code,
+			</if>
+			<if test="priceAgreementCode != null">
+				price_agreement_code,
+			</if>
+			<if test="priceMarkCode != null">
+				price_mark_code,
+			</if>
+			<if test="priceTryoutCode != null">
+				price_tryout_code,
+			</if>
+			<if test="platformOrgCode != null">
+				platform_org_code,
+			</if>
+			<if test="videoFlag != null">
+				video_flag,
+			</if>
+			<if test="repairTel != null">
+				repair_tel,
+			</if>
+			<if test="repairScope != null">
+				repair_scope,
+			</if>
+			<if test="specializedBrand != null">
+				specialized_brand,
+			</if>
+			<if test="auditOpinion != null">
+				audit_opinion,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="accountcode != null">
+				accountCode,
+			</if>
+			<if test="accountname != null">
+				accountName,
+			</if>
+			<if test="bankname != null">
+				bankName,
+			</if>
+			<if test="citycode != null">
+				cityCode,
+			</if>
+			<if test="towncode != null">
+				townCode,
+			</if>
+			<if test="regioncode != null">
+				regionCode,
+			</if>
+			<if test="cityname != null">
+				cityName,
+			</if>
+			<if test="townname != null">
+				townName,
+			</if>
+			<if test="regionname != null">
+				regionName,
+			</if>
+			<if test="brandcode != null">
+				brandCode,
+			</if>
+			<if test="brandname != null">
+				brandName,
+			</if>
+			<if test="brandpercent != null">
+				brandPercent,
+			</if>
+			<if test="atticepointcode != null">
+				atticePointCode,
+			</if>
+			<if test="atticepointname != null">
+				atticePointName,
+			</if>
+			<if test="partspercent != null">
+				partsPercent,
+			</if>
+			<if test="verifyflag != null">
+				verifyFlag,
+			</if>
+			<if test="verifyby != null">
+				verifyBy,
+			</if>
+			<if test="verifydate != null">
+				verifyDate,
+			</if>
+			<if test="isEnable != null">
+				is_enable,
+			</if>
+			<if test="createBy != null">
+				create_by,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateBy != null">
+				update_by,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="garageId != null">
+				#{garageId,jdbcType=VARCHAR},
+			</if>
+			<if test="garageCode != null">
+				#{garageCode,jdbcType=VARCHAR},
+			</if>
+			<if test="garageName != null">
+				#{garageName,jdbcType=VARCHAR},
+			</if>
+			<if test="garageAbbr != null">
+				#{garageAbbr,jdbcType=VARCHAR},
+			</if>
+			<if test="garageAddr != null">
+				#{garageAddr,jdbcType=VARCHAR},
+			</if>
+			<if test="longitude != null">
+				#{longitude,jdbcType=DECIMAL},
+			</if>
+			<if test="latitude != null">
+				#{latitude,jdbcType=DECIMAL},
+			</if>
+			<if test="companyCode != null">
+				#{companyCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				#{orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="industryOrgCode != null">
+				#{industryOrgCode,jdbcType=VARCHAR},
+			</if>
+			<if test="contact != null">
+				#{contact,jdbcType=VARCHAR},
+			</if>
+			<if test="contactPhone != null">
+				#{contactPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="fax != null">
+				#{fax,jdbcType=VARCHAR},
+			</if>
+			<if test="repairLevel != null">
+				#{repairLevel,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryCode != null">
+				#{categoryCode,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryName != null">
+				#{categoryName,jdbcType=VARCHAR},
+			</if>
+			<if test="directPayFlag != null">
+				#{directPayFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="partDiscountRate != null">
+				#{partDiscountRate,jdbcType=REAL},
+			</if>
+			<if test="paintFacmanHour != null">
+				#{paintFacmanHour,jdbcType=REAL},
+			</if>
+			<if test="repairFacmanHour != null">
+				#{repairFacmanHour,jdbcType=REAL},
+			</if>
+			<if test="assemblyFacmanHour != null">
+				#{assemblyFacmanHour,jdbcType=REAL},
+			</if>
+			<if test="discountStandard != null">
+				#{discountStandard,jdbcType=REAL},
+			</if>
+			<if test="repairFacmanDiscount != null">
+				#{repairFacmanDiscount,jdbcType=REAL},
+			</if>
+			<if test="paintFacmanDiscount != null">
+				#{paintFacmanDiscount,jdbcType=REAL},
+			</if>
+			<if test="assemblyFacmanDiscount != null">
+				#{assemblyFacmanDiscount,jdbcType=REAL},
+			</if>
+			<if test="machineRepairDiscount != null">
+				#{machineRepairDiscount,jdbcType=REAL},
+			</if>
+			<if test="electricanDiscount != null">
+				#{electricanDiscount,jdbcType=REAL},
+			</if>
+			<if test="evalFloatRatio != null">
+				#{evalFloatRatio,jdbcType=REAL},
+			</if>
+			<if test="auditRatio != null">
+				#{auditRatio,jdbcType=REAL},
+			</if>
+			<if test="compensateIndex != null">
+				#{compensateIndex,jdbcType=REAL},
+			</if>
+			<if test="contractDate != null">
+				#{contractDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="repair4sFlag != null">
+				#{repair4sFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="outsideFlag != null">
+				#{outsideFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="cptFlag != null">
+				#{cptFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="price4sCode != null">
+				#{price4sCode,jdbcType=VARCHAR},
+			</if>
+			<if test="priceAgreementCode != null">
+				#{priceAgreementCode,jdbcType=VARCHAR},
+			</if>
+			<if test="priceMarkCode != null">
+				#{priceMarkCode,jdbcType=VARCHAR},
+			</if>
+			<if test="priceTryoutCode != null">
+				#{priceTryoutCode,jdbcType=VARCHAR},
+			</if>
+			<if test="platformOrgCode != null">
+				#{platformOrgCode,jdbcType=VARCHAR},
+			</if>
+			<if test="videoFlag != null">
+				#{videoFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="repairTel != null">
+				#{repairTel,jdbcType=VARCHAR},
+			</if>
+			<if test="repairScope != null">
+				#{repairScope,jdbcType=VARCHAR},
+			</if>
+			<if test="specializedBrand != null">
+				#{specializedBrand,jdbcType=VARCHAR},
+			</if>
+			<if test="auditOpinion != null">
+				#{auditOpinion,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="accountcode != null">
+				#{accountcode,jdbcType=VARCHAR},
+			</if>
+			<if test="accountname != null">
+				#{accountname,jdbcType=VARCHAR},
+			</if>
+			<if test="bankname != null">
+				#{bankname,jdbcType=VARCHAR},
+			</if>
+			<if test="citycode != null">
+				#{citycode,jdbcType=VARCHAR},
+			</if>
+			<if test="towncode != null">
+				#{towncode,jdbcType=VARCHAR},
+			</if>
+			<if test="regioncode != null">
+				#{regioncode,jdbcType=VARCHAR},
+			</if>
+			<if test="cityname != null">
+				#{cityname,jdbcType=VARCHAR},
+			</if>
+			<if test="townname != null">
+				#{townname,jdbcType=VARCHAR},
+			</if>
+			<if test="regionname != null">
+				#{regionname,jdbcType=VARCHAR},
+			</if>
+			<if test="brandcode != null">
+				#{brandcode,jdbcType=VARCHAR},
+			</if>
+			<if test="brandname != null">
+				#{brandname,jdbcType=VARCHAR},
+			</if>
+			<if test="brandpercent != null">
+				#{brandpercent,jdbcType=REAL},
+			</if>
+			<if test="atticepointcode != null">
+				#{atticepointcode,jdbcType=VARCHAR},
+			</if>
+			<if test="atticepointname != null">
+				#{atticepointname,jdbcType=VARCHAR},
+			</if>
+			<if test="partspercent != null">
+				#{partspercent,jdbcType=REAL},
+			</if>
+			<if test="verifyflag != null">
+				#{verifyflag,jdbcType=VARCHAR},
+			</if>
+			<if test="verifyby != null">
+				#{verifyby,jdbcType=VARCHAR},
+			</if>
+			<if test="verifydate != null">
+				#{verifydate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isEnable != null">
+				#{isEnable,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+				#{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+				#{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.liveneo.etrepair.pojo.GarageCoreExample"
+		resultType="java.lang.Integer">
+		select count(*) from et_garage_core
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update et_garage_core
+		<set>
+			<if test="record.garageId != null">
+				garage_id = #{record.garageId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.garageCode != null">
+				garage_code = #{record.garageCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.garageName != null">
+				garage_name = #{record.garageName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.garageAbbr != null">
+				garage_abbr = #{record.garageAbbr,jdbcType=VARCHAR},
+			</if>
+			<if test="record.garageAddr != null">
+				garage_addr = #{record.garageAddr,jdbcType=VARCHAR},
+			</if>
+			<if test="record.longitude != null">
+				longitude = #{record.longitude,jdbcType=DECIMAL},
+			</if>
+			<if test="record.latitude != null">
+				latitude = #{record.latitude,jdbcType=DECIMAL},
+			</if>
+			<if test="record.companyCode != null">
+				company_code = #{record.companyCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orgId != null">
+				org_id = #{record.orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.industryOrgCode != null">
+				industry_org_code = #{record.industryOrgCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.contact != null">
+				contact = #{record.contact,jdbcType=VARCHAR},
+			</if>
+			<if test="record.contactPhone != null">
+				contact_phone = #{record.contactPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="record.fax != null">
+				fax = #{record.fax,jdbcType=VARCHAR},
+			</if>
+			<if test="record.repairLevel != null">
+				repair_level = #{record.repairLevel,jdbcType=VARCHAR},
+			</if>
+			<if test="record.categoryCode != null">
+				category_code = #{record.categoryCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.categoryName != null">
+				category_name = #{record.categoryName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.directPayFlag != null">
+				direct_pay_flag = #{record.directPayFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="record.partDiscountRate != null">
+				part_discount_rate = #{record.partDiscountRate,jdbcType=REAL},
+			</if>
+			<if test="record.paintFacmanHour != null">
+				paint_facman_hour = #{record.paintFacmanHour,jdbcType=REAL},
+			</if>
+			<if test="record.repairFacmanHour != null">
+				repair_facman_hour = #{record.repairFacmanHour,jdbcType=REAL},
+			</if>
+			<if test="record.assemblyFacmanHour != null">
+				assembly_facman_hour = #{record.assemblyFacmanHour,jdbcType=REAL},
+			</if>
+			<if test="record.discountStandard != null">
+				discount_standard = #{record.discountStandard,jdbcType=REAL},
+			</if>
+			<if test="record.repairFacmanDiscount != null">
+				repair_facman_discount =
+				#{record.repairFacmanDiscount,jdbcType=REAL},
+			</if>
+			<if test="record.paintFacmanDiscount != null">
+				paint_facman_discount = #{record.paintFacmanDiscount,jdbcType=REAL},
+			</if>
+			<if test="record.assemblyFacmanDiscount != null">
+				assembly_facman_discount =
+				#{record.assemblyFacmanDiscount,jdbcType=REAL},
+			</if>
+			<if test="record.machineRepairDiscount != null">
+				machine_repair_discount =
+				#{record.machineRepairDiscount,jdbcType=REAL},
+			</if>
+			<if test="record.electricanDiscount != null">
+				electrican_discount = #{record.electricanDiscount,jdbcType=REAL},
+			</if>
+			<if test="record.evalFloatRatio != null">
+				eval_float_ratio = #{record.evalFloatRatio,jdbcType=REAL},
+			</if>
+			<if test="record.auditRatio != null">
+				audit_ratio = #{record.auditRatio,jdbcType=REAL},
+			</if>
+			<if test="record.compensateIndex != null">
+				compensate_index = #{record.compensateIndex,jdbcType=REAL},
+			</if>
+			<if test="record.contractDate != null">
+				contract_date = #{record.contractDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.repair4sFlag != null">
+				repair_4s_flag = #{record.repair4sFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="record.outsideFlag != null">
+				outside_flag = #{record.outsideFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="record.cptFlag != null">
+				cpt_flag = #{record.cptFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="record.price4sCode != null">
+				price_4s_code = #{record.price4sCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.priceAgreementCode != null">
+				price_agreement_code = #{record.priceAgreementCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.priceMarkCode != null">
+				price_mark_code = #{record.priceMarkCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.priceTryoutCode != null">
+				price_tryout_code = #{record.priceTryoutCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.platformOrgCode != null">
+				platform_org_code = #{record.platformOrgCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.videoFlag != null">
+				video_flag = #{record.videoFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="record.repairTel != null">
+				repair_tel = #{record.repairTel,jdbcType=VARCHAR},
+			</if>
+			<if test="record.repairScope != null">
+				repair_scope = #{record.repairScope,jdbcType=VARCHAR},
+			</if>
+			<if test="record.specializedBrand != null">
+				specialized_brand = #{record.specializedBrand,jdbcType=VARCHAR},
+			</if>
+			<if test="record.auditOpinion != null">
+				audit_opinion = #{record.auditOpinion,jdbcType=VARCHAR},
+			</if>
+			<if test="record.remark != null">
+				remark = #{record.remark,jdbcType=VARCHAR},
+			</if>
+			<if test="record.accountcode != null">
+				accountCode = #{record.accountcode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.accountname != null">
+				accountName = #{record.accountname,jdbcType=VARCHAR},
+			</if>
+			<if test="record.bankname != null">
+				bankName = #{record.bankname,jdbcType=VARCHAR},
+			</if>
+			<if test="record.citycode != null">
+				cityCode = #{record.citycode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.towncode != null">
+				townCode = #{record.towncode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.regioncode != null">
+				regionCode = #{record.regioncode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.cityname != null">
+				cityName = #{record.cityname,jdbcType=VARCHAR},
+			</if>
+			<if test="record.townname != null">
+				townName = #{record.townname,jdbcType=VARCHAR},
+			</if>
+			<if test="record.regionname != null">
+				regionName = #{record.regionname,jdbcType=VARCHAR},
+			</if>
+			<if test="record.brandcode != null">
+				brandCode = #{record.brandcode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.brandname != null">
+				brandName = #{record.brandname,jdbcType=VARCHAR},
+			</if>
+			<if test="record.brandpercent != null">
+				brandPercent = #{record.brandpercent,jdbcType=REAL},
+			</if>
+			<if test="record.atticepointcode != null">
+				atticePointCode = #{record.atticepointcode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.atticepointname != null">
+				atticePointName = #{record.atticepointname,jdbcType=VARCHAR},
+			</if>
+			<if test="record.partspercent != null">
+				partsPercent = #{record.partspercent,jdbcType=REAL},
+			</if>
+			<if test="record.verifyflag != null">
+				verifyFlag = #{record.verifyflag,jdbcType=VARCHAR},
+			</if>
+			<if test="record.verifyby != null">
+				verifyBy = #{record.verifyby,jdbcType=VARCHAR},
+			</if>
+			<if test="record.verifydate != null">
+				verifyDate = #{record.verifydate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.isEnable != null">
+				is_enable = #{record.isEnable,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createBy != null">
+				create_by = #{record.createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateBy != null">
+				update_by = #{record.updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update et_garage_core
+		set garage_id = #{record.garageId,jdbcType=VARCHAR},
+		garage_code = #{record.garageCode,jdbcType=VARCHAR},
+		garage_name = #{record.garageName,jdbcType=VARCHAR},
+		garage_abbr = #{record.garageAbbr,jdbcType=VARCHAR},
+		garage_addr = #{record.garageAddr,jdbcType=VARCHAR},
+		longitude = #{record.longitude,jdbcType=DECIMAL},
+		latitude = #{record.latitude,jdbcType=DECIMAL},
+		company_code = #{record.companyCode,jdbcType=VARCHAR},
+		org_id = #{record.orgId,jdbcType=VARCHAR},
+		industry_org_code = #{record.industryOrgCode,jdbcType=VARCHAR},
+		contact = #{record.contact,jdbcType=VARCHAR},
+		contact_phone = #{record.contactPhone,jdbcType=VARCHAR},
+		fax = #{record.fax,jdbcType=VARCHAR},
+		repair_level = #{record.repairLevel,jdbcType=VARCHAR},
+		category_code = #{record.categoryCode,jdbcType=VARCHAR},
+		category_name = #{record.categoryName,jdbcType=VARCHAR},
+		direct_pay_flag = #{record.directPayFlag,jdbcType=VARCHAR},
+		part_discount_rate = #{record.partDiscountRate,jdbcType=REAL},
+		paint_facman_hour = #{record.paintFacmanHour,jdbcType=REAL},
+		repair_facman_hour = #{record.repairFacmanHour,jdbcType=REAL},
+		assembly_facman_hour = #{record.assemblyFacmanHour,jdbcType=REAL},
+		discount_standard = #{record.discountStandard,jdbcType=REAL},
+		repair_facman_discount = #{record.repairFacmanDiscount,jdbcType=REAL},
+		paint_facman_discount = #{record.paintFacmanDiscount,jdbcType=REAL},
+		assembly_facman_discount =
+		#{record.assemblyFacmanDiscount,jdbcType=REAL},
+		machine_repair_discount =
+		#{record.machineRepairDiscount,jdbcType=REAL},
+		electrican_discount = #{record.electricanDiscount,jdbcType=REAL},
+		eval_float_ratio = #{record.evalFloatRatio,jdbcType=REAL},
+		audit_ratio = #{record.auditRatio,jdbcType=REAL},
+		compensate_index = #{record.compensateIndex,jdbcType=REAL},
+		contract_date = #{record.contractDate,jdbcType=TIMESTAMP},
+		repair_4s_flag = #{record.repair4sFlag,jdbcType=VARCHAR},
+		outside_flag = #{record.outsideFlag,jdbcType=VARCHAR},
+		cpt_flag = #{record.cptFlag,jdbcType=VARCHAR},
+		price_4s_code = #{record.price4sCode,jdbcType=VARCHAR},
+		price_agreement_code = #{record.priceAgreementCode,jdbcType=VARCHAR},
+		price_mark_code = #{record.priceMarkCode,jdbcType=VARCHAR},
+		price_tryout_code = #{record.priceTryoutCode,jdbcType=VARCHAR},
+		platform_org_code = #{record.platformOrgCode,jdbcType=VARCHAR},
+		video_flag = #{record.videoFlag,jdbcType=VARCHAR},
+		repair_tel = #{record.repairTel,jdbcType=VARCHAR},
+		repair_scope = #{record.repairScope,jdbcType=VARCHAR},
+		specialized_brand = #{record.specializedBrand,jdbcType=VARCHAR},
+		audit_opinion = #{record.auditOpinion,jdbcType=VARCHAR},
+		remark = #{record.remark,jdbcType=VARCHAR},
+		accountCode = #{record.accountcode,jdbcType=VARCHAR},
+		accountName = #{record.accountname,jdbcType=VARCHAR},
+		bankName = #{record.bankname,jdbcType=VARCHAR},
+		cityCode = #{record.citycode,jdbcType=VARCHAR},
+		townCode = #{record.towncode,jdbcType=VARCHAR},
+		regionCode = #{record.regioncode,jdbcType=VARCHAR},
+		cityName = #{record.cityname,jdbcType=VARCHAR},
+		townName = #{record.townname,jdbcType=VARCHAR},
+		regionName = #{record.regionname,jdbcType=VARCHAR},
+		brandCode = #{record.brandcode,jdbcType=VARCHAR},
+		brandName = #{record.brandname,jdbcType=VARCHAR},
+		brandPercent = #{record.brandpercent,jdbcType=REAL},
+		atticePointCode = #{record.atticepointcode,jdbcType=VARCHAR},
+		atticePointName = #{record.atticepointname,jdbcType=VARCHAR},
+		partsPercent = #{record.partspercent,jdbcType=REAL},
+		verifyFlag = #{record.verifyflag,jdbcType=VARCHAR},
+		verifyBy = #{record.verifyby,jdbcType=VARCHAR},
+		verifyDate = #{record.verifydate,jdbcType=TIMESTAMP},
+		is_enable = #{record.isEnable,jdbcType=VARCHAR},
+		create_by = #{record.createBy,jdbcType=VARCHAR},
+		create_time = #{record.createTime,jdbcType=TIMESTAMP},
+		update_by = #{record.updateBy,jdbcType=VARCHAR},
+		update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.liveneo.etrepair.pojo.GarageCore">
+		update et_garage_core
+		<set>
+			<if test="garageCode != null">
+				garage_code = #{garageCode,jdbcType=VARCHAR},
+			</if>
+			<if test="garageName != null">
+				garage_name = #{garageName,jdbcType=VARCHAR},
+			</if>
+			<if test="garageAbbr != null">
+				garage_abbr = #{garageAbbr,jdbcType=VARCHAR},
+			</if>
+			<if test="garageAddr != null">
+				garage_addr = #{garageAddr,jdbcType=VARCHAR},
+			</if>
+			<if test="longitude != null">
+				longitude = #{longitude,jdbcType=DECIMAL},
+			</if>
+			<if test="latitude != null">
+				latitude = #{latitude,jdbcType=DECIMAL},
+			</if>
+			<if test="companyCode != null">
+				company_code = #{companyCode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgId != null">
+				org_id = #{orgId,jdbcType=VARCHAR},
+			</if>
+			<if test="industryOrgCode != null">
+				industry_org_code = #{industryOrgCode,jdbcType=VARCHAR},
+			</if>
+			<if test="contact != null">
+				contact = #{contact,jdbcType=VARCHAR},
+			</if>
+			<if test="contactPhone != null">
+				contact_phone = #{contactPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="fax != null">
+				fax = #{fax,jdbcType=VARCHAR},
+			</if>
+			<if test="repairLevel != null">
+				repair_level = #{repairLevel,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryCode != null">
+				category_code = #{categoryCode,jdbcType=VARCHAR},
+			</if>
+			<if test="categoryName != null">
+				category_name = #{categoryName,jdbcType=VARCHAR},
+			</if>
+			<if test="directPayFlag != null">
+				direct_pay_flag = #{directPayFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="partDiscountRate != null">
+				part_discount_rate = #{partDiscountRate,jdbcType=REAL},
+			</if>
+			<if test="paintFacmanHour != null">
+				paint_facman_hour = #{paintFacmanHour,jdbcType=REAL},
+			</if>
+			<if test="repairFacmanHour != null">
+				repair_facman_hour = #{repairFacmanHour,jdbcType=REAL},
+			</if>
+			<if test="assemblyFacmanHour != null">
+				assembly_facman_hour = #{assemblyFacmanHour,jdbcType=REAL},
+			</if>
+			<if test="discountStandard != null">
+				discount_standard = #{discountStandard,jdbcType=REAL},
+			</if>
+			<if test="repairFacmanDiscount != null">
+				repair_facman_discount = #{repairFacmanDiscount,jdbcType=REAL},
+			</if>
+			<if test="paintFacmanDiscount != null">
+				paint_facman_discount = #{paintFacmanDiscount,jdbcType=REAL},
+			</if>
+			<if test="assemblyFacmanDiscount != null">
+				assembly_facman_discount = #{assemblyFacmanDiscount,jdbcType=REAL},
+			</if>
+			<if test="machineRepairDiscount != null">
+				machine_repair_discount = #{machineRepairDiscount,jdbcType=REAL},
+			</if>
+			<if test="electricanDiscount != null">
+				electrican_discount = #{electricanDiscount,jdbcType=REAL},
+			</if>
+			<if test="evalFloatRatio != null">
+				eval_float_ratio = #{evalFloatRatio,jdbcType=REAL},
+			</if>
+			<if test="auditRatio != null">
+				audit_ratio = #{auditRatio,jdbcType=REAL},
+			</if>
+			<if test="compensateIndex != null">
+				compensate_index = #{compensateIndex,jdbcType=REAL},
+			</if>
+			<if test="contractDate != null">
+				contract_date = #{contractDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="repair4sFlag != null">
+				repair_4s_flag = #{repair4sFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="outsideFlag != null">
+				outside_flag = #{outsideFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="cptFlag != null">
+				cpt_flag = #{cptFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="price4sCode != null">
+				price_4s_code = #{price4sCode,jdbcType=VARCHAR},
+			</if>
+			<if test="priceAgreementCode != null">
+				price_agreement_code = #{priceAgreementCode,jdbcType=VARCHAR},
+			</if>
+			<if test="priceMarkCode != null">
+				price_mark_code = #{priceMarkCode,jdbcType=VARCHAR},
+			</if>
+			<if test="priceTryoutCode != null">
+				price_tryout_code = #{priceTryoutCode,jdbcType=VARCHAR},
+			</if>
+			<if test="platformOrgCode != null">
+				platform_org_code = #{platformOrgCode,jdbcType=VARCHAR},
+			</if>
+			<if test="videoFlag != null">
+				video_flag = #{videoFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="repairTel != null">
+				repair_tel = #{repairTel,jdbcType=VARCHAR},
+			</if>
+			<if test="repairScope != null">
+				repair_scope = #{repairScope,jdbcType=VARCHAR},
+			</if>
+			<if test="specializedBrand != null">
+				specialized_brand = #{specializedBrand,jdbcType=VARCHAR},
+			</if>
+			<if test="auditOpinion != null">
+				audit_opinion = #{auditOpinion,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="accountcode != null">
+				accountCode = #{accountcode,jdbcType=VARCHAR},
+			</if>
+			<if test="accountname != null">
+				accountName = #{accountname,jdbcType=VARCHAR},
+			</if>
+			<if test="bankname != null">
+				bankName = #{bankname,jdbcType=VARCHAR},
+			</if>
+			<if test="citycode != null">
+				cityCode = #{citycode,jdbcType=VARCHAR},
+			</if>
+			<if test="towncode != null">
+				townCode = #{towncode,jdbcType=VARCHAR},
+			</if>
+			<if test="regioncode != null">
+				regionCode = #{regioncode,jdbcType=VARCHAR},
+			</if>
+			<if test="cityname != null">
+				cityName = #{cityname,jdbcType=VARCHAR},
+			</if>
+			<if test="townname != null">
+				townName = #{townname,jdbcType=VARCHAR},
+			</if>
+			<if test="regionname != null">
+				regionName = #{regionname,jdbcType=VARCHAR},
+			</if>
+			<if test="brandcode != null">
+				brandCode = #{brandcode,jdbcType=VARCHAR},
+			</if>
+			<if test="brandname != null">
+				brandName = #{brandname,jdbcType=VARCHAR},
+			</if>
+			<if test="brandpercent != null">
+				brandPercent = #{brandpercent,jdbcType=REAL},
+			</if>
+			<if test="atticepointcode != null">
+				atticePointCode = #{atticepointcode,jdbcType=VARCHAR},
+			</if>
+			<if test="atticepointname != null">
+				atticePointName = #{atticepointname,jdbcType=VARCHAR},
+			</if>
+			<if test="partspercent != null">
+				partsPercent = #{partspercent,jdbcType=REAL},
+			</if>
+			<if test="verifyflag != null">
+				verifyFlag = #{verifyflag,jdbcType=VARCHAR},
+			</if>
+			<if test="verifyby != null">
+				verifyBy = #{verifyby,jdbcType=VARCHAR},
+			</if>
+			<if test="verifydate != null">
+				verifyDate = #{verifydate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isEnable != null">
+				is_enable = #{isEnable,jdbcType=VARCHAR},
+			</if>
+			<if test="createBy != null">
+				create_by = #{createBy,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateBy != null">
+				update_by = #{updateBy,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where garage_id = #{garageId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.liveneo.etrepair.pojo.GarageCore">
+		update et_garage_core
+		set garage_code = #{garageCode,jdbcType=VARCHAR},
+		garage_name = #{garageName,jdbcType=VARCHAR},
+		garage_abbr = #{garageAbbr,jdbcType=VARCHAR},
+		garage_addr = #{garageAddr,jdbcType=VARCHAR},
+		longitude = #{longitude,jdbcType=DECIMAL},
+		latitude = #{latitude,jdbcType=DECIMAL},
+		company_code = #{companyCode,jdbcType=VARCHAR},
+		org_id = #{orgId,jdbcType=VARCHAR},
+		industry_org_code = #{industryOrgCode,jdbcType=VARCHAR},
+		contact = #{contact,jdbcType=VARCHAR},
+		contact_phone = #{contactPhone,jdbcType=VARCHAR},
+		fax = #{fax,jdbcType=VARCHAR},
+		repair_level = #{repairLevel,jdbcType=VARCHAR},
+		category_code = #{categoryCode,jdbcType=VARCHAR},
+		category_name = #{categoryName,jdbcType=VARCHAR},
+		direct_pay_flag = #{directPayFlag,jdbcType=VARCHAR},
+		part_discount_rate = #{partDiscountRate,jdbcType=REAL},
+		paint_facman_hour = #{paintFacmanHour,jdbcType=REAL},
+		repair_facman_hour = #{repairFacmanHour,jdbcType=REAL},
+		assembly_facman_hour = #{assemblyFacmanHour,jdbcType=REAL},
+		discount_standard = #{discountStandard,jdbcType=REAL},
+		repair_facman_discount = #{repairFacmanDiscount,jdbcType=REAL},
+		paint_facman_discount = #{paintFacmanDiscount,jdbcType=REAL},
+		assembly_facman_discount = #{assemblyFacmanDiscount,jdbcType=REAL},
+		machine_repair_discount = #{machineRepairDiscount,jdbcType=REAL},
+		electrican_discount = #{electricanDiscount,jdbcType=REAL},
+		eval_float_ratio = #{evalFloatRatio,jdbcType=REAL},
+		audit_ratio = #{auditRatio,jdbcType=REAL},
+		compensate_index = #{compensateIndex,jdbcType=REAL},
+		contract_date = #{contractDate,jdbcType=TIMESTAMP},
+		repair_4s_flag = #{repair4sFlag,jdbcType=VARCHAR},
+		outside_flag = #{outsideFlag,jdbcType=VARCHAR},
+		cpt_flag = #{cptFlag,jdbcType=VARCHAR},
+		price_4s_code = #{price4sCode,jdbcType=VARCHAR},
+		price_agreement_code = #{priceAgreementCode,jdbcType=VARCHAR},
+		price_mark_code = #{priceMarkCode,jdbcType=VARCHAR},
+		price_tryout_code = #{priceTryoutCode,jdbcType=VARCHAR},
+		platform_org_code = #{platformOrgCode,jdbcType=VARCHAR},
+		video_flag = #{videoFlag,jdbcType=VARCHAR},
+		repair_tel = #{repairTel,jdbcType=VARCHAR},
+		repair_scope = #{repairScope,jdbcType=VARCHAR},
+		specialized_brand = #{specializedBrand,jdbcType=VARCHAR},
+		audit_opinion = #{auditOpinion,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR},
+		accountCode = #{accountcode,jdbcType=VARCHAR},
+		accountName = #{accountname,jdbcType=VARCHAR},
+		bankName = #{bankname,jdbcType=VARCHAR},
+		cityCode = #{citycode,jdbcType=VARCHAR},
+		townCode = #{towncode,jdbcType=VARCHAR},
+		regionCode = #{regioncode,jdbcType=VARCHAR},
+		cityName = #{cityname,jdbcType=VARCHAR},
+		townName = #{townname,jdbcType=VARCHAR},
+		regionName = #{regionname,jdbcType=VARCHAR},
+		brandCode = #{brandcode,jdbcType=VARCHAR},
+		brandName = #{brandname,jdbcType=VARCHAR},
+		brandPercent = #{brandpercent,jdbcType=REAL},
+		atticePointCode = #{atticepointcode,jdbcType=VARCHAR},
+		atticePointName = #{atticepointname,jdbcType=VARCHAR},
+		partsPercent = #{partspercent,jdbcType=REAL},
+		verifyFlag = #{verifyflag,jdbcType=VARCHAR},
+		verifyBy = #{verifyby,jdbcType=VARCHAR},
+		verifyDate = #{verifydate,jdbcType=TIMESTAMP},
+		is_enable = #{isEnable,jdbcType=VARCHAR},
+		create_by = #{createBy,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_by = #{updateBy,jdbcType=VARCHAR},
+		update_time = #{updateTime,jdbcType=TIMESTAMP}
+		where garage_id = #{garageId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="countGarageCore" parameterType="com.liveneo.etrepair.pojo.GarageCore"
+		resultType="java.lang.Integer">
+		select count(*) FROM et_garage_core g LEFT JOIN et_org_info o ON
+		g.org_id=o.org_code WHERE g.category_code IN('001','003')
+		<if test="garageName != null and garageName!=''">
+			and g.garage_name like CONCAT('%',#{garageName},'%')
+		</if>
+		<if test="garageCode != null and garageCode!=''">
+			and g.garage_code like CONCAT('%',#{garageCode},'%')
+		</if>
+		<if test="repairTel != null and repairTel!=''">
+			and g.repair_tel like CONCAT('%',#{repairTel},'%')
+		</if>
+		<if test="orgId != null and orgId!=''">
+			and o.org_id = #{orgId,jdbcType=VARCHAR}
+		</if>
+		<if test="companyCode != null and companyCode!=''">
+			and g.company_code = #{companyCode,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<select id="selectGarageCoreList" resultMap="BaseResultMap"
+		parameterType="com.liveneo.etrepair.pojo.GarageCore">
+		select g.*,o.org_desc
+		FROM et_garage_core g LEFT JOIN et_org_info o ON g.org_id=o.org_code
+		WHERE g.category_code IN('001','003')
+		<if test="garageName != null and garageName!=''">
+			and g.garage_name like CONCAT('%',#{garageName},'%')
+		</if>
+		<if test="garageCode != null and garageCode!=''">
+			and g.garage_code like CONCAT('%',#{garageCode},'%')
+		</if>
+		<if test="repairTel != null and repairTel!=''">
+			and g.repair_tel like CONCAT('%',#{repairTel},'%')
+		</if>
+		<if test="orgId != null and orgId!=''">
+			and o.org_id = #{orgId,jdbcType=VARCHAR}
+		</if>
+		<if test="companyCode != null and companyCode!=''">
+			and g.company_code = #{companyCode,jdbcType=VARCHAR}
+		</if>
+		<if test="skip != null and limit !=null">
+			limit #{skip}, #{limit}
+		</if>
+	</select>
+
+	<select id="isGarageIdExistInGarageCore" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		SELECT EXISTS (SELECT garage_id FROM et_garage WHERE
+		garage_id=#{garageId}) isexists;
+	</select>
+
+</mapper>

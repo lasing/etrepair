@@ -1,0 +1,117 @@
+@charset "utf-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+html, body {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+/* box */
+.box {
+	width: 850px;
+	height: auto;
+	overflow: hidden;
+	background: #EAEAEA;
+	margin: 10px auto 10px auto;
+	padding: 10px 0 0 10px;
+}
+
+.box ul {
+	margin: 0px;
+	padding: 0px;
+	float: left;
+}
+
+.box li {
+		width: 150px;
+	height: 100px;
+	float: left;
+	cursor: pointer;
+	display: inline;
+	margin: 0 10px 10px 0;
+	border: 5px solid #ffffff;
+}
+
+#bg {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	background: #000;
+	filter: alpha(opacity : 50);
+	opacity: 0.5;
+	display: none;
+}
+
+#bottom {
+	width: 215px;
+	height: 50px;
+	position: absolute;
+	left: 50%;
+	bottom: 0px;
+	margin: 0 0 0 -107px;
+	border: 1px solid #232323;
+	background: #444;
+	padding: 1px;
+	z-index: 1;
+	display: none;
+}
+
+#bottom ul {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	background: #4A483B;
+}
+
+#bottom li {
+	background: url(../images/ico.png) no-repeat;
+	float: left;
+	display: inline;
+	margin: 8px 0 0 18px;
+	cursor: pointer;
+}
+
+#bottom li.prev {
+	width: 30px;
+	height: 33px;
+	background-position: 0 0;
+}
+
+#bottom li.next {
+	width: 30px;
+	height: 33px;
+	background-position: -35px 0;
+}
+
+#bottom li.img {
+	width: 30px;
+	height: 33px;
+	background-position: -106px 0;
+}
+
+#bottom li.close {
+	width: 31px;
+	height: 33px;
+	background-position: -70px 0;
+}
+
+#frame {
+	background: #fff;
+	padding: 3px;
+	position: absolute;
+	z-index: 2;
+	display: none;
+	filter: alpha(opacity : 0);
+	opacity: 0;
+	text-align: center;
+}
